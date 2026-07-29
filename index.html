@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<title>Sergio Lopez — Architecture &amp; Product Photography, Malmö</title>
+<meta name="description" content="Sergio Lopez is an architecture, interiors and product photographer based in Malmö, Sweden, working across Europe and North America.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<script src="image-slot.js?v=idb1"></script>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Jost:wght@200;300;400;500&amp;display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#fdfcfa;font-family:'Jost',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  *{box-sizing:border-box}
+  ::selection{background:#111;color:#fdfcfa}
+  .cap{font-family:'Oswald',Arial,sans-serif;text-transform:uppercase}
+  .ph{position:relative;background:repeating-linear-gradient(135deg,var(--c1,#dcdad3),var(--c1,#dcdad3) 10px,var(--c2,#e8e6df) 10px,var(--c2,#e8e6df) 20px);display:flex;align-items:center;justify-content:center;overflow:hidden;width:100%;height:100%}
+  .ph span{font:10px/1.4 ui-monospace,Menlo,monospace;color:#8a8578;letter-spacing:.03em;text-align:center;padding:0 10px;text-transform:uppercase;pointer-events:none}
+  .navlink{cursor:pointer}
+  .navlink:hover{opacity:.55}
+  .home-brand,.menu-logo{padding:8px 14px;background:rgba(253,252,250,.82);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border-radius:3px}
+  @media (max-width:640px){
+    .home-brand{gap:5px !important;margin-left:-14px !important}
+    .home-brand>span{gap:1px !important}
+    .home-brand .cap:first-child{font-size:10px !important}
+    .home-brand .cap:last-child{font-size:7px !important}
+    .home-brand svg{width:13px !important;height:13px !important}
+    .menu-logo{top:16px !important;gap:2px !important}
+    .menu-logo span{font-size:8px !important}
+    .menu-logo img{width:32px !important}
+    .footer-bar{gap:7px !important;bottom:18px !important;left:20px !important;right:20px !important}
+    .footer-bar span,.footer-bar a{font-size:8px !important;letter-spacing:.08em !important}
+    .cat2-wrap{flex-direction:column !important;height:auto !important;min-height:100vh;gap:22px !important;padding:92px 18px 130px !important}
+    .cat2-wrap>div:first-child{height:auto !important}
+    .cat2-side{width:100% !important;order:-1;height:auto !important;overflow:visible !important;flex-direction:row !important;flex-wrap:wrap !important;justify-content:center !important;gap:8px 18px !important}
+    .cat2-side .navlink{text-align:center !important}
+    .cat2-grid{grid-template-columns:repeat(2,1fr) !important;overflow:visible !important;height:auto !important}
+  }
+  @keyframes menuOverlayIn{from{opacity:0}to{opacity:1}}
+  @keyframes menuItemIn{
+    from{opacity:0;transform:translateY(14px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  .menu-item{animation:menuItemIn .5s cubic-bezier(.22,.9,.3,1) both}
+  @keyframes menuMetaIn{from{opacity:0}to{opacity:1}}
+  @keyframes fallA{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(-14px,72px) rotate(-48deg);opacity:0}}
+  @keyframes fallB{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(4px,88px) rotate(26deg);opacity:0}}
+  @keyframes fallC{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(16px,64px) rotate(58deg);opacity:0}}
+  .logo-piece{position:absolute;background-image:url('assets/logo-t.png');background-size:44px 30px;background-repeat:no-repeat;animation-timing-function:cubic-bezier(.5,0,.9,.6);animation-fill-mode:both}
+  @keyframes cubeFallA{to{transform:translate(-34px,104vh) rotate(-160deg)}}
+  @keyframes cubeFallB{to{transform:translate(10px,106vh) rotate(120deg)}}
+  @keyframes cubeFallC{to{transform:translate(-70px,105vh) rotate(220deg)}}
+  .grid-cube{position:fixed;width:5px;height:5px;background:#111;z-index:60;pointer-events:none;animation-timing-function:cubic-bezier(.45,0,.85,.55);animation-fill-mode:both}
+  @keyframes wallCellIn{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+  .wall-cell{animation:wallCellIn .3s cubic-bezier(.2,.8,.3,1) both}
+  .fname{position:absolute;left:4px;right:4px;bottom:6px;display:flex;justify-content:center;opacity:0;transition:opacity .15s;pointer-events:none;z-index:3}
+  .fname span{font:10px/1.3 ui-monospace,Menlo,monospace;color:#3a3a3a;background:rgba(253,252,250,.92);padding:3px 8px;max-width:100%;white-space:nowrap}
+  .cellw:hover image-slot[data-filled]~.fname{opacity:1}
+</style>
+</helmet>
+<div style="position:relative;width:100%;min-height:100vh;background:#fdfcfa;color:#111">
+
+  <!-- ============ TOP CHROME (home only) ============ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    
+  </sc-if>
+
+  <!-- ============ SINGLE IMAGE VIEW ============ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <div style="position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 28px 32px; z-index: 40; pointer-events: none">
+      <div class="navlink home-brand" style="pointer-events:auto;display:flex;flex-direction:row;align-items:center;gap:8px" onClick="{{ goHome }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#111"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></svg><span style="display:flex;flex-direction:column;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
+      <div class="navlink menu-logo" style="pointer-events:auto;position:absolute;left:50%;transform:translateX(-50%);top:20px;display:flex;flex-direction:column;align-items:center;gap:4px" onClick="{{ openMenu }}">
+        <span class="cap" style="font-size:10px;font-weight:500;letter-spacing:.3em;color:#999;margin-right:-.3em">MENU</span>
+        <img src="assets/logo-t.png" alt="Menu" style="width:44px;height:auto">
+      </div>
+      <sc-if value="{{ isSingle }}" hint-placeholder-val="{{ true }}">
+        <div style="pointer-events:auto;display:flex;flex-direction:column;align-items:flex-end;gap:14px">
+        </div>
+      </sc-if>
+    </div>
+    <sc-if value="{{ isSingle }}" hint-placeholder-val="{{ true }}">
+      <div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 90px clamp(16px,5vw,60px) 70px; position: relative">
+        <div data-ratio-frame="" style="position:relative;height:min(78vh,880px);aspect-ratio:4/5;max-width:90vw;min-width:0;overflow:hidden;box-shadow:0 30px 80px -30px rgba(0,0,0,.25)">
+          <image-slot id="{{ currentImg.slotId }}" shape="rect" fit="contain" src="{{ currentImg.src }}" placeholder="{{ currentImg.label }}" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
+          <div style="position:absolute;top:88px;bottom:0;left:0;width:45%;cursor:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2740%27%20height%3D%2740%27%3E%3Cpath%20d%3D%27M25%208%20L13%2020%20L25%2032%27%20fill%3D%27none%27%20stroke%3D%27%23111%27%20stroke-width%3D%272.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E) 20 20, w-resize;z-index:5" onClick="{{ prevImg }}"></div>
+          <div style="position:absolute;top:88px;bottom:0;right:0;width:45%;cursor:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2740%27%20height%3D%2740%27%3E%3Cpath%20d%3D%27M15%208%20L27%2020%20L15%2032%27%20fill%3D%27none%27%20stroke%3D%27%23111%27%20stroke-width%3D%272.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E) 20 20, e-resize;z-index:5" onClick="{{ nextImg }}"></div>
+        </div>
+        <sc-if value="{{ currentHasName }}" hint-placeholder-val="{{ false }}">
+          <div class="cap" style="font:11px/1.4 ui-monospace,Menlo,monospace;letter-spacing:.06em;color:#3a3a3a;text-align:center;pointer-events:none">{{ currentName }}</div>
+        </sc-if>
+      </div>
+      <div class="cap" style="position: fixed; bottom: 45px; left: 648px; font-size: 10px; font-weight: 400; letter-spacing: .1em; color: #999; z-index: 40; top: 925px">{{ counterLabel }}</div>
+    </sc-if>
+
+  </sc-if>
+
+
+  <!-- ============ FULLSCREEN MENU ============ -->
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;background:#fdfcfa;z-index:100;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 clamp(24px,8vw,60px);animation:menuOverlayIn .25s ease both">
+      <div style="position:absolute;top:20px;left:50%;margin-left:-22px;width:44px;height:30px;pointer-events:none">
+        <div class="logo-piece" style="left:0;top:0;width:15px;height:15px;background-position:0 0;animation:fallA .55s .05s both"></div>
+        <div class="logo-piece" style="left:15px;top:0;width:15px;height:15px;background-position:-15px 0;animation:fallB .6s 0s both"></div>
+        <div class="logo-piece" style="left:30px;top:0;width:14px;height:15px;background-position:-30px 0;animation:fallC .5s .1s both"></div>
+        <div class="logo-piece" style="left:0;top:15px;width:15px;height:15px;background-position:0 -15px;animation:fallC .5s 0s both"></div>
+        <div class="logo-piece" style="left:15px;top:15px;width:15px;height:15px;background-position:-15px -15px;animation:fallA .6s .12s both"></div>
+        <div class="logo-piece" style="left:30px;top:15px;width:14px;height:15px;background-position:-30px -15px;animation:fallB .55s .07s both"></div>
+      </div>
+      <div class="navlink" style="position:absolute;top:28px;left:32px;display:flex;flex-direction:row;align-items:center;gap:8px;animation:menuMetaIn .3s ease .8s both" onClick="{{ goHome }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#111"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></svg><span style="display:flex;flex-direction:column;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
+      <div class="navlink" style="position:absolute;top:28px;right:32px;font-size:22px;font-weight:300;color:#111;animation:menuMetaIn .3s ease .8s both" onClick="{{ closeMenu }}">✕</div>
+      <div style="position:absolute;top:120px;bottom:110px;left:clamp(24px,8vw,60px);right:clamp(24px,8vw,60px);max-width:640px;display:flex;flex-direction:column;gap:4px;overflow-y:auto">
+        <sc-for list="{{ catList2 }}" as="c" hint-placeholder-count="3">
+          <div class="navlink menu-item" style="display:flex;align-items:center;gap:16px;animation-delay:.5s" onClick="{{ c.open }}"><span style="flex:none;width:14px;height:1px;background:#111"></span><span style="font-family:'Jost',Helvetica,sans-serif;text-transform:uppercase;white-space:nowrap;font-size:clamp(15px,2.6vw,27px);font-weight:200;letter-spacing:.14em;line-height:1.08">{{ c.label }}</span></div>
+        </sc-for>
+        <div class="navlink menu-item" style="display:flex;align-items:center;gap:16px;animation-delay:.62s;margin-top:22px" onClick="{{ gotoIndex }}"><span style="flex:none;width:14px;height:1px;background:#b6b2a6"></span><span style="font-family:'Jost',Helvetica,sans-serif;text-transform:uppercase;white-space:nowrap;font-size:clamp(15px,2.6vw,27px);font-weight:200;letter-spacing:.14em;line-height:1.08;color:#8a867b">LIBRARY</span></div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ LIBRARY (private uploader — not linked for visitors) ============ -->
+  <sc-if value="{{ isIndex }}" hint-placeholder-val="{{ false }}">
+    <div style="min-height:100vh;padding:104px clamp(16px,4vw,40px) 90px">
+      <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;margin-bottom:6px">
+        <span class="cap" style="font-size:13px;font-weight:500;letter-spacing:.18em;color:#111">LIBRARY</span>
+        <span class="cap" style="font-size:10px;font-weight:400;letter-spacing:.14em;color:#b6b2a6">{{ libCount }} PHOTOS · {{ libProjectCount }} PROJECTS · {{ featuredCount }} IN SLIDESHOW</span>
+      </div>
+      <div class="cap" style="max-width:640px;margin-bottom:26px;font-size:10px;font-weight:400;letter-spacing:.1em;line-height:2;color:#999;text-wrap:pretty">DROP PHOTOS ANYWHERE BELOW — THEY FILE THEMSELVES INTO CATEGORIES AND PROJECTS FROM THEIR OWN FILENAMES <span style="color:#111">CATEGORY--LOCATION--CLIENT</span>. THE LANDING SLIDESHOW IS WHATEVER SITS IN <span style="color:#111">IMAGES/SLIDESHOW/</span> — COPY A PHOTO THERE TO FEATURE IT.</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:4px">
+        <sc-for list="{{ libCells }}" as="img" hint-placeholder-count="0">
+          <div style="position:relative;aspect-ratio:1;min-width:0">
+            <image-slot id="{{ img.slotId }}" shape="rect" fit="cover" src="{{ img.src }}" placeholder="{{ img.shortLabel }}" style="width:100%;height:100%"></image-slot>
+            <sc-if value="{{ img.hasName }}" hint-placeholder-val="{{ false }}">
+              <div class="cap" style="position:absolute;left:0;right:0;bottom:0;padding:4px 5px;background:rgba(253,252,250,.9);font-size:7px;font-weight:500;letter-spacing:.1em;color:#111;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ img.fileName }}</div>
+            </sc-if>
+            <sc-if value="{{ img.hasName }}" hint-placeholder-val="{{ false }}">
+              <div class="navlink" title="Show this photo in the landing slideshow" style="position:absolute;top:5px;right:5px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:{{ img.pickBg }};color:{{ img.pickColor }};border:1px solid {{ img.pickBorder }};font-size:11px;line-height:1;cursor:pointer" onClick="{{ img.togglePick }}">●</div>
+            </sc-if>
+          </div>
+        </sc-for>
+        <div class="navlink" title="Add upload slots" style="position:relative;aspect-ratio:1;min-width:0;display:flex;align-items:center;justify-content:center;border:1px dashed #d8d4c8;color:#b6b2a6;font-size:26px;font-weight:200;cursor:pointer" style-hover="color:#111;border-color:#111" onClick="{{ addLibSlot }}">+</div>
+      </div>
+      <div class="cap navlink" title="Erase every photo in the library" style="margin-top:44px;font-size:9px;font-weight:500;letter-spacing:.18em;color:#cfcbbf" style-hover="color:#a33;opacity:1" onClick="{{ clearAllGalleries }}">☠ ERASE ALL PHOTOS (KEEPS ABOUT + VIDEO)</div>
+    </div>
+    <div class="navlink home-brand" style="position:fixed;top:28px;left:32px;display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#111"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></svg><span style="display:flex;flex-direction:column;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
+    <div class="navlink menu-logo" style="position:fixed;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;z-index:40" onClick="{{ openMenu }}"><span class="cap" style="font-size:10px;font-weight:500;letter-spacing:.3em;color:#999;margin-right:-.3em">MENU</span><img src="assets/logo-t.png" alt="Menu" style="width:44px;height:auto"></div>
+  </sc-if>
+
+  <!-- ============ INDEX 2.0 (categories) ============ -->
+  <sc-if value="{{ isIndex2 }}" hint-placeholder-val="{{ false }}">
+    <sc-if value="{{ cat2Landing }}" hint-placeholder-val="{{ true }}">
+      <div style="min-height:100vh;padding:110px clamp(20px,6vw,60px) 80px;max-width:560px">
+        <sc-for list="{{ catList2 }}" as="c" hint-placeholder-count="6">
+          <div style="border-bottom:1px solid #eae8e1">
+            <div class="cap navlink" style="display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:18px 0;font-family:'Jost',Helvetica,sans-serif;text-transform:uppercase;font-size:clamp(15px,2.6vw,27px);font-weight:200;letter-spacing:.14em" onClick="{{ c.open }}">
+              <span style="white-space:nowrap">{{ c.label }}</span>
+              <span style="font-size:12px;font-weight:300;color:#b6b2a6;letter-spacing:.1em">{{ c.countLabel }}</span>
+            </div>
+          </div>
+        </sc-for>
+        <sc-if value="{{ cat2Empty }}" hint-placeholder-val="{{ false }}">
+          <div class="cap" style="padding:36px 0;font-size:11px;line-height:1.7;letter-spacing:.1em;color:#b6b2a6">NO CATEGORISED IMAGES YET.<br>UPLOAD PHOTOS NAMED LIKE CATEGORY-LOCATION-PROJECT.JPG</div>
+        </sc-if>
+      </div>
+    </sc-if>
+    <sc-if value="{{ cat2Selected }}" hint-placeholder-val="{{ false }}">
+      <div class="cat2-wrap" style="height:100vh;padding:104px 32px 36px;display:flex;gap:48px;align-items:stretch;max-width:1600px;margin:0 auto;box-sizing:border-box">
+        <div style="flex:1;min-width:0;height:100%;display:flex;flex-direction:column">
+          <div class="cap" style="flex: none; font-family: 'Jost',Helvetica,sans-serif; text-transform: uppercase; font-size: clamp(15px,2.6vw,27px); font-weight: 200; letter-spacing: .14em; color: #111; margin-bottom: 32px; text-align: center">{{ cat2Title }}</div>
+          <div class="cat2-grid" style="flex:1;min-height:0;overflow-y:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));grid-auto-rows:min-content;gap:14px;align-content:start">
+            <sc-for list="{{ cat2Cells }}" as="img" hint-placeholder-count="0">
+              <div class="wall-cell cellw" style="position:relative;min-width:0;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;cursor:pointer;animation-delay:{{ img.wallDelay }}" onClick="{{ img.view }}">
+                <image-slot id="{{ img.slotId }}" shape="rect" fit="contain" src="{{ img.src }}" placeholder="{{ img.label }}" style="width:100%;height:100%"></image-slot>
+                <div style="position:absolute;inset:0;z-index:4;cursor:pointer" onClick="{{ img.view }}"></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div class="cat2-side" style="width:230px;flex:none;height:100%;overflow-y:auto;display:flex;flex-direction:column;gap:1px">
+          <sc-for list="{{ cat2Chips }}" as="ch" hint-placeholder-count="0">
+            <div class="navlink" style="{{ ch.style }}" onClick="{{ ch.onClick }}">{{ ch.label }}</div>
+          </sc-for>
+        </div>
+      </div>
+      <div class="cap navlink" style="position: fixed; top: 78px; left: 39px; font-size: 14px; font-weight: 700; letter-spacing: .15em; z-index: 40; color: #111" onClick="{{ backToCats2 }}">← INDEX</div>
+    </sc-if>
+    <div class="navlink home-brand" style="position:fixed;top:28px;left:32px;display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#111"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></svg><span style="display:flex;flex-direction:column;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
+    <div class="navlink menu-logo" style="position:fixed;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;z-index:40" onClick="{{ openMenu }}"><span class="cap" style="font-size:10px;font-weight:500;letter-spacing:.3em;color:#999;margin-right:-.3em">MENU</span><img src="assets/logo-t.png" alt="Menu" style="width:44px;height:auto"></div>
+    <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(253,252,250,.55);backdrop-filter:blur(14px) saturate(0);-webkit-backdrop-filter:blur(14px) saturate(0);animation:menuOverlayIn .25s ease both" onClick="{{ closeLightbox }}">
+        {{ lightboxImg }}
+        <sc-if value="{{ lightboxHasNav }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:0;left:0;width:40%;height:100%;cursor:w-resize;z-index:5" onClick="{{ prevLightbox }}"></div>
+          <div style="position:absolute;top:0;right:0;width:40%;height:100%;cursor:e-resize;z-index:5" onClick="{{ nextLightbox }}"></div>
+        </sc-if>
+        <div class="navlink" style="position:absolute;top:28px;right:32px;font-size:22px;font-weight:300;color:#111;z-index:6" onClick="{{ closeLightbox }}">✕</div>
+      </div>
+    </sc-if>
+  </sc-if>
+
+  <!-- ============ PROJECT DETAIL ============ -->
+  <sc-if value="{{ isProject }}" hint-placeholder-val="{{ false }}">
+    <div style="min-height:100vh;padding:74px 32px 70px">
+      <div style="text-align:center;margin-bottom:20px">
+        <div class="cap" style="font-size:14px;font-weight:700;letter-spacing:.14em">{{ activeProject.title }}</div>
+        <div class="cap" style="font-size:11px;letter-spacing:.15em;color:#999;margin-top:6px">{{ activeProject.year }} · {{ activeProject.cat }}</div>
+        <sc-if value="{{ isEditable }}" hint-placeholder-val="{{ false }}">
+          <div class="cap navlink" style="display:inline-block;margin-top:12px;font-size:9px;font-weight:500;letter-spacing:.18em;color:#b6b2a6" style-hover="color:#a33;opacity:1" onClick="{{ clearProjectImages }}">CLEAR THIS GALLERY</div>
+        </sc-if>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:14px;max-width:1600px;margin:0 auto">
+        <sc-for list="{{ activeProject.images }}" as="img" hint-placeholder-count="12">
+          <div class="wall-cell cellw" style="position:relative;min-width:0;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;cursor:pointer;animation-delay:{{ img.wallDelay }};opacity:{{ img.opacity }}" onClick="{{ img.view }}"><image-slot id="{{ img.slotId }}" shape="rect" fit="contain" src="{{ img.src }}" placeholder="{{ img.label }}"></image-slot><div style="position:absolute;inset:0;z-index:4;cursor:pointer" draggable="{{ true }}" onClick="{{ img.view }}" onDragStart="{{ img.dragStart }}" onDragOver="{{ img.dragOver }}" onDrop="{{ img.drop }}" onDragEnd="{{ img.dragEnd }}"></div><sc-if value="{{ img.hasName }}" hint-placeholder-val="{{ false }}"><div class="fname" style="container-type:inline-size;z-index:5"><span style="font-size:{{ img.nameFs }}">{{ img.fileName }}</span></div></sc-if></div>
+        </sc-for>
+      </div>
+    </div>
+    <div class="navlink home-brand" style="position:fixed;top:28px;left:32px;display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#111"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></svg><span style="display:flex;flex-direction:column;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
+    <div class="cap navlink" style="position:fixed;top:64px;left:32px;font-size:14px;font-weight:700;letter-spacing:.15em;z-index:40;color:#111" onClick="{{ gotoIndex }}">← INDEX</div>
+    <div class="navlink menu-logo" style="position:fixed;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;z-index:40" onClick="{{ openMenu }}"><span class="cap" style="font-size:10px;font-weight:500;letter-spacing:.3em;color:#999;margin-right:-.3em">MENU</span><img src="assets/logo-t.png" alt="Menu" style="width:44px;height:auto"></div>
+    <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(253,252,250,.55);backdrop-filter:blur(14px) saturate(0);-webkit-backdrop-filter:blur(14px) saturate(0);animation:menuOverlayIn .25s ease both" onClick="{{ closeLightbox }}">
+        {{ lightboxImg }}
+        <sc-if value="{{ lightboxHasNav }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:0;left:0;width:40%;height:100%;cursor:w-resize;z-index:5" onClick="{{ prevLightbox }}"></div>
+          <div style="position:absolute;top:0;right:0;width:40%;height:100%;cursor:e-resize;z-index:5" onClick="{{ nextLightbox }}"></div>
+        </sc-if>
+        <div class="navlink" style="position:absolute;top:28px;right:32px;font-size:22px;font-weight:300;color:#111;z-index:6" onClick="{{ closeLightbox }}">✕</div>
+      </div>
+    </sc-if>
+  </sc-if>
+
+  <!-- ============ ABOUT PAGE ============ -->
+  <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+    <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:110px 40px 130px">
+      <div style="display:flex;gap:clamp(28px,5vw,70px);max-width:1060px;flex-wrap:wrap;align-items:flex-start;justify-content:center">
+        <div data-ratio-frame="" style="width:min(320px,80vw);aspect-ratio:4/5;flex:none;position:relative;overflow:hidden"><image-slot id="about-portrait" shape="rect" placeholder="Portrait — Sergio Lopez" style="position:absolute;inset:0;width:100%;height:100%"></image-slot></div>
+        <div style="max-width:480px">
+          <div class="cap" style="font-size:14px;font-weight:700;letter-spacing:.14em;margin-bottom:22px">ABOUT ME</div>
+          <p style="font-size:15px;line-height:1.75;color:#3a3a3a;font-weight:300">Hi, I’m Sergio, thanks for stopping by. I’m a photographer who’s been working with a camera for over 15 years, and I love capturing spaces, objects, and artwork in a way that feels clean and elegant. What I’m drawn to most are the lines, shapes, and shadows that give each subject its own character.</p>
+          <p style="font-size:15px;line-height:1.75;color:#3a3a3a;font-weight:300;margin-top:14px">Over the years I’ve had the chance to work with some great people and brands, including Bvlgari, Casa Wabi, COS, Grupo Habita, IHG Hotels &amp; Resorts, IKEA, Kimpton Hotels, Presidente Intercontinental and TAX Alberto Kalach, and my photos have appeared in publications like Dezeen, Wallpaper, Vogue, Monocle, Rizzoli, The Architectural Review and GQ.</p>
+          <p style="font-size:15px;line-height:1.75;color:#3a3a3a;font-weight:300;margin-top:14px">My life in photography started out in the countryside, photographing animals and insects, and that curiosity for details, light, and how things fit together has never really left me. I’m a bit of a gear nerd too. I love experimenting with cameras, lighting, and the technical side of photography.</p>
+          <p style="font-size:15px;line-height:1.75;color:#3a3a3a;font-weight:300;margin-top:14px">Outside of photography, I enjoy diving into books about mythology, psychology, and science fiction, or sketching to unwind.</p>
+          <p style="font-size:15px;line-height:1.75;color:#3a3a3a;font-weight:300;margin-top:14px">If you’d like to collaborate or just say hi, you can reach me at <a href="mailto:hola@sergiolopez.mx" style="color:#111">hola@sergiolopez.mx</a>. I’d be happy to hear from you.</p>
+        </div>
+      </div>
+    </div>
+    <div class="navlink home-brand" style="position:fixed;top:28px;left:32px;display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#111"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></svg><span style="display:flex;flex-direction:column;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
+    <div class="navlink menu-logo" style="position:fixed;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;z-index:40" onClick="{{ openMenu }}"><span class="cap" style="font-size:10px;font-weight:500;letter-spacing:.3em;color:#999;margin-right:-.3em">MENU</span><img src="assets/logo-t.png" alt="Menu" style="width:44px;height:auto"></div>
+  </sc-if>
+
+  <!-- ============ CONTACT PAGE ============ -->
+  <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+    <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:0 40px;text-align:center">
+      <div class="cap" style="font-size:14px;font-weight:700;letter-spacing:.14em">CONTACT</div>
+      <p style="font-size:15px;line-height:1.7;color:#3a3a3a;font-weight:300;max-width:440px;margin:0">I'm available for local and international projects as well as potential employment opportunities.</p>
+      <a href="mailto:hola@sergiolopez.mx" class="cap" style="font-size:17px;letter-spacing:.05em;color:#111;text-decoration:none;border-bottom:1px solid #111;padding-bottom:2px">HOLA@SERGIOLOPEZ.MX</a>
+      <a href="mailto:sergio.lopjim@gmail.com" class="cap" style="font-size:13px;letter-spacing:.05em;color:#666;text-decoration:none">SERGIO.LOPJIM@GMAIL.COM</a>
+      <div class="cap" style="font-size:12px;letter-spacing:.12em;color:#999;margin-top:6px">SPACES, OBJECTS AND STORIES</div>
+      <a class="cap navlink" href="https://www.instagram.com/sergiolopezfoto/" target="_blank" rel="noopener" style="font-size:12px;letter-spacing:.1em;color:#111;text-decoration:none;margin-top:18px">INSTAGRAM</a>
+    </div>
+    <div class="navlink home-brand" style="position:fixed;top:28px;left:32px;display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#111"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></svg><span style="display:flex;flex-direction:column;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
+    <div class="navlink menu-logo" style="position:fixed;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;z-index:40" onClick="{{ openMenu }}"><span class="cap" style="font-size:10px;font-weight:500;letter-spacing:.3em;color:#999;margin-right:-.3em">MENU</span><img src="assets/logo-t.png" alt="Menu" style="width:44px;height:auto"></div>
+  </sc-if>
+
+  <!-- ============ VIDEO PAGE ============ -->
+  <sc-if value="{{ isVideo }}" hint-placeholder-val="{{ false }}">
+    <div style="min-height:100vh;padding:110px 32px 70px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:16px;max-width:1300px;margin:0 auto">
+        <sc-for list="{{ videos }}" as="v" hint-placeholder-count="0">
+          <div style="aspect-ratio:16/9;position:relative;overflow:hidden;opacity:{{ v.opacity }}" draggable="{{ true }}" onDragStart="{{ v.dragStart }}" onDragOver="{{ v.dragOver }}" onDrop="{{ v.drop }}" onDragEnd="{{ v.dragEnd }}">
+            <sc-if value="{{ v.playing }}" hint-placeholder-val="{{ false }}">
+              <iframe src="{{ v.embed }}" title="{{ v.title }}" referrerPolicy="strict-origin-when-cross-origin" style="width:100%;height:100%;border:0;display:block" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+            </sc-if>
+            <sc-if value="{{ v.idle }}" hint-placeholder-val="{{ false }}">
+              <div class="navlink" style="position:absolute;inset:0;cursor:pointer" onClick="{{ v.play }}">
+                {{ v.thumbImg }}
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+                  <div style="width:0;height:0;border-top:11px solid transparent;border-bottom:11px solid transparent;border-left:17px solid #fdfcfa;margin-left:4px;filter:drop-shadow(0 1px 6px rgba(0,0,0,.45))"></div>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div class="navlink home-brand" style="position:fixed;top:28px;left:32px;display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#111"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></svg><span style="display:flex;flex-direction:column;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
+    <div class="navlink menu-logo" style="position:fixed;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;z-index:40" onClick="{{ openMenu }}"><span class="cap" style="font-size:10px;font-weight:500;letter-spacing:.3em;color:#999;margin-right:-.3em">MENU</span><img src="assets/logo-t.png" alt="Menu" style="width:44px;height:auto"></div>
+  </sc-if>
+
+  <div class="cap footer-bar" style="position:fixed;bottom:18px;left:24px;display:flex;gap:13px;align-items:center;flex-wrap:wrap;justify-content:flex-start;z-index:40;padding:8px 14px;background:rgba(253,252,250,.82);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border-radius:3px">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5" style="display:block;flex:none;margin-right:-7px"><circle cx="12" cy="12" r="7"></circle><line x1="12" y1="1" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="23"></line><line x1="1" y1="12" x2="5" y2="12"></line><line x1="19" y1="12" x2="23" y2="12"></line></svg>
+    <span style="font-size:10px;font-weight:400;letter-spacing:.15em;color:#999">MALMÖ, SWEDEN</span>
+    <span style="color:#cfcbbf;font-size:9px">·</span>
+    <span class="navlink" style="font-size:10px;font-weight:400;letter-spacing:.15em;color:#111;cursor:pointer" onClick="{{ gotoVideo }}">VIDEO</span>
+    <span style="color:#cfcbbf;font-size:9px">·</span>
+    <span class="navlink" style="font-size:10px;font-weight:400;letter-spacing:.15em;color:#111;cursor:pointer" onClick="{{ gotoAbout }}">ABOUT</span>
+    <span style="color:#cfcbbf;font-size:9px">·</span>
+    <span class="navlink" style="font-size:10px;font-weight:400;letter-spacing:.15em;color:#111;cursor:pointer" onClick="{{ gotoContact }}">CONTACT</span>
+    <span style="color:#cfcbbf;font-size:9px">·</span>
+    <a class="navlink" href="https://www.instagram.com/sergiolopezfoto/" target="_blank" rel="noopener" style="font-size:10px;font-weight:400;letter-spacing:.15em;color:#111;text-decoration:none">INSTAGRAM</a>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;extraMenuItems&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Menu&quot;,&quot;description&quot;:&quot;Extra menu entries, comma-separated (e.g. \&quot;PRINTS, JOURNAL\&quot;). Each appears in the fullscreen menu below CONTACT.&quot;},&quot;extraYears&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;2026&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Index&quot;,&quot;description&quot;:&quot;Extra years for the index, comma-separated (e.g. \&quot;2016, 2015\&quot;).&quot;},&quot;extraProjects&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Index&quot;,&quot;description&quot;:&quot;Extra galleries, semicolon-separated as year:title (e.g. \&quot;2025: HOTEL HABITA; 2016: EARLY WORK\&quot;). Each gets its own 20-slot gallery page.&quot;},&quot;renameProjects&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Index&quot;,&quot;description&quot;:&quot;Rename galleries, semicolon-separated as year: old = new (e.g. \&quot;2023: ARCHITECTURE = BUILT WORKS; 2024: PORTRAITS = PEOPLE\&quot;).&quot;}}">
+const CATS = ['ARCHITECTURE','INTERIOR','PRODUCT','ARTWORK','PORTRAIT'];
+const TONES = [
+  ['#dcdad3','#e8e6df'],['#111214','#26282b'],['#d7ded8','#e6ece7'],
+  ['#e3ded4','#efeadf'],['#c9cdd1','#dde1e4'],['#12100f','#1f1c1a']
+];
+
+function makeStyle(i){
+  const t = TONES[i % TONES.length];
+  return `--c1:${t[0]};--c2:${t[1]}`;
+}
+
+class Component extends DCLogic {
+  state = {
+    page: 'home',
+    mode: 'single',
+    index: Math.floor(Math.random() * 50),
+    menuOpen: false,
+    activeProjectId: null,
+    openYear: 2025,
+    lightboxSrc: null,
+    playingVideo: null,
+    videoOrder: null,
+    dragVideo: null,
+    wallOrder: null,
+    dragWall: null,
+    projOrders: {},
+    cat2: null,
+    filter2: {},
+    fileNames: { ...Component.DEFAULT_FILENAMES, ...JSON.parse(localStorage.getItem('sl-filenames') || '{}') },
+    dragProj: null,
+    editingProj: null,
+    editingValue: '',
+    hoverProj: null,
+    pinnedProj: null,
+    dragPrev: null,
+    prevOrders: {},
+    titleOverrides: JSON.parse(localStorage.getItem('sl-title-overrides') || '{}'),
+    userProjects: JSON.parse(localStorage.getItem('sl-user-projects') || '[]'),
+    removedProjects: JSON.parse(localStorage.getItem('sl-removed-projects') || '[]'),
+  };
+
+  // Wall placeholders: PRODUCT 19, HOTEL 18, ARCHITECTURE 15 (= 52),
+  // First a round-robin mix of HOTEL + ARCHITECTURE (no clumps), then all
+  // PRODUCT tiles grouped together at the end.
+  gridCats = (() => {
+    const pools = [['HOTEL', 42], ['ARCHITECTURE', 33]]
+      .map(([c, n]) => Array(n).fill(c));
+    const out = [];
+    let any = true;
+    while (any) { any = false; for (const p of pools) { if (p.length) { out.push(p.shift()); any = true; } } }
+    return out.concat(Array(45).fill('PRODUCT'));
+  })();
+
+  // ---- Landing slideshow = the photos picked out of the library ----
+  // Selection lives in sl-featured (an ordered list of library slot ids). With
+  // nothing picked yet, every uploaded photo shows, so the landing page is
+  // never blank.
+  featuredIds() {
+    // On the live site the slideshow IS the images/slideshow/ folder — putting a
+    // photo there is the selection, so it travels with the repo instead of
+    // living in one browser.
+    const published = Object.keys(this._manifestSrc || {})
+      .filter((id) => /(^|\/)slideshow\//.test(this._manifestSrc[id]));
+    if (published.length) return published;
+    try {
+      const saved = JSON.parse(localStorage.getItem('sl-featured') || 'null');
+      if (Array.isArray(saved) && saved.length) return saved;
+    } catch (e) {}
+    return null;
+  }
+
+  isFeatured(slotId) {
+    const f = this.featuredIds();
+    return f ? f.includes(slotId) : false;
+  }
+
+  toggleFeatured = (slotId) => {
+    const f = this.featuredIds() || [];
+    const next = f.includes(slotId) ? f.filter((x) => x !== slotId) : [...f, slotId];
+    localStorage.setItem('sl-featured', JSON.stringify(next));
+    this.setState({ featured: next });
+  };
+
+  get images() {
+    const names = this.state.fileNames || {};
+    const featured = this.featuredIds();
+    const ids = featured
+      ? featured.filter((id) => names[id])
+      : Object.keys(names).filter((k) => k.startsWith('lib-'));
+    const src = this._manifestSrc || {};
+    return ids.map((slotId, i) => {
+      const meta = this.parseFileName(names[slotId] || '') || {};
+      return {
+        id: i,
+        slotId,
+        src: src[slotId] || '',
+        cat: (meta.category || '').toUpperCase(),
+        style: makeStyle(i),
+        ratio: ['4/5', '3/2', '1/1', '4/5', '2/3', '3/2'][i % 6],
+        label: (meta.project || '').replace(/-/g, ' ').toUpperCase() || `IMG ${String(i + 1).padStart(2, '0')}`,
+      };
+    });
+  }
+
+  // ---- LIBRARY: the one private place every photo is uploaded ----
+  // Slots are lib-N. Categories and projects are read from each file's name, so
+  // the visitor-facing galleries build themselves from whatever lives here.
+  libCount() {
+    const n = parseInt(localStorage.getItem('sl-lib-count') || '0', 10) || 0;
+    return Math.max(n, 24);
+  }
+
+  addLibSlot = () => {
+    localStorage.setItem('sl-lib-count', String(this.libCount() + 12));
+    this.forceUpdate();
+  };
+
+
+  componentDidMount() {
+    this.loadManifest();
+    // Watch dropped images and match each tile's aspect ratio to the photo's
+    // natural orientation (vertical, horizontal, square).
+    // (project-page grid cells are fixed squares with fit="contain" — the
+    // ratio watcher only reshapes masonry tiles and the landing frame)
+    this._syncRatios = () => {
+      const wraps = document.querySelectorAll('[data-masonry] > div, [data-ratio-frame]');
+      wraps.forEach((w) => {
+        const slot = w.querySelector('image-slot');
+        const img = slot && slot.shadowRoot && slot.shadowRoot.querySelector('img');
+        if (img && img.naturalWidth && img.naturalHeight) {
+          const r = (img.naturalWidth / img.naturalHeight).toFixed(4);
+          if (w.dataset.r !== r) { w.dataset.r = r; w.style.aspectRatio = r; }
+        } else if (w.dataset.r) {
+          delete w.dataset.r;
+          w.style.aspectRatio = w.hasAttribute('data-ratio-frame') ? '4/5' : '';
+        }
+      });
+    };
+    this._ratioTimer = setInterval(this._syncRatios, 700);
+
+    // Source of truth for "which slots hold a photo" is <image-slot>'s own
+    // IndexedDB store — images added by click-to-browse never touch our
+    // fileNames map, so relying on that undercounts the slideshow.
+    this._filledSet = new Set();
+    this._filledSig = null;
+    this._hydrateFilled = () => {
+      try {
+        const req = indexedDB.open('image-slots-store', 1);
+        req.onupgradeneeded = () => { try { req.result.createObjectStore('slots'); } catch (e) {} };
+        req.onsuccess = () => {
+          try {
+            const kr = req.result.transaction('slots', 'readonly').objectStore('slots').getAllKeys();
+            kr.onsuccess = () => {
+              const keys = kr.result || [];
+              const sig = keys.join(',');
+              if (sig !== this._filledSig) {
+                this._filledSig = sig;
+                this._filledSet = new Set(keys);
+                this._slideCache = null;
+                this.forceUpdate();
+              }
+            };
+          } catch (e) {}
+        };
+      } catch (e) {}
+    };
+    this._hydrateFilled();
+    this._filledTimer = setInterval(this._hydrateFilled, 1500);
+
+    this._onKeyDown = (e) => {
+      if (e.key === 'Escape' && this.state.lightboxSrc) {
+        this.closeLightbox();
+      } else if (this.state.lightboxSrc && this.state.lightboxSlots) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); this.stepLightbox(1); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); this.stepLightbox(-1); }
+      }
+    };
+    window.addEventListener('keydown', this._onKeyDown);
+
+    this._onResize = () => { if (this.state.page === 'wall') this.forceUpdate(); };
+    window.addEventListener('resize', this._onResize);
+
+    // Multi-image drop: distribute files across consecutive placeholders,
+    // and record filenames for the hover caption. Capture phase so it runs
+    // before <image-slot>'s own single-file drop handler.
+    this._onDropCapture = (e) => {
+      const dt = e.dataTransfer;
+      const files = dt && dt.files
+        ? Array.from(dt.files).filter((f) => /^image\//.test(f.type)) : [];
+      if (!files.length) return;
+      const path = e.composedPath ? e.composedPath() : [];
+      // Archive list: dropping files onto a gallery row fills that gallery.
+      // Handled here at capture phase (with stopImmediatePropagation) so the
+      // host editor never sees the drop and duplicates the row / opens its
+      // own editor — the reported bug.
+      const rowEl = path.find((n) => n.getAttribute && n.getAttribute('data-proj-drop'));
+      if (rowEl && this.state.page === 'index') {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+        const pid = rowEl.getAttribute('data-proj-drop');
+        this.setState({ page: 'project', activeProjectId: pid, menuOpen: false });
+        setTimeout(() => this.ingestFilesIntoProject(pid, files), 320);
+        return;
+      }
+      let slotEl = path.find((n) => n.tagName === 'IMAGE-SLOT');
+      // On the project/category grids each cell has a reorder overlay ABOVE the
+      // slot, so the drop target is that overlay, not the <image-slot> — resolve
+      // the slot from the enclosing cell and ingest ourselves.
+      let viaOverlay = false;
+      if (!slotEl) {
+        const cell = path.find((n) => n.classList && n.classList.contains('wall-cell'));
+        if (cell) { slotEl = cell.querySelector('image-slot'); viaOverlay = true; }
+      }
+      if (!slotEl || !slotEl.id) return;
+      const names = { ...this.state.fileNames };
+      if (files.length > 1) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+        let order;
+        const pid = this.state.page === 'project' ? (this.state.activeProjectId || 'p1') : null;
+        const isLib = this.state.page === 'index';
+        if (this.state.page === 'wall') order = this.getWallOrder();
+        else if (isLib) order = Array.from({ length: this.libCount() }, (_, i) => `lib-${i}`);
+        else if (pid) order = this.getProjOrder(pid, this.projCount(pid));
+        else order = [slotEl.id];
+        let start = order.indexOf(slotEl.id);
+        if (start < 0) { order = [slotEl.id]; start = 0; }
+        // Never wrap around to the start (that overwrites the first images).
+        // On a project page, grow past the current block with fresh slot ids
+        // instead; the extra files ingest once the new placeholders render.
+        let targets = order.slice(start);
+        if (pid && files.length > targets.length) {
+          let next = order.length;
+          while (targets.length < files.length && next < 950) {
+            targets.push(`proj-${pid}-${next}`);
+            next++;
+          }
+        }
+        // On the wall, grow with fresh grid-N slots and bump the wall count so
+        // the new placeholders mount and the extra files ingest into them.
+        if (this.state.page === 'wall' && files.length > targets.length) {
+          let next = order.length;
+          while (targets.length < files.length && next < 2000) {
+            targets.push(`grid-${next}`);
+            next++;
+          }
+          const cur = parseInt(localStorage.getItem('sl-wall-count') || '0', 10) || 0;
+          localStorage.setItem('sl-wall-count', String(Math.max(cur, next)));
+        }
+        // In the library, grow with fresh lib-N slots so a drop of any size
+        // lands in one go — this is the bulk-upload surface.
+        if (isLib && files.length > targets.length) {
+          let next = order.length;
+          while (targets.length < files.length && next < 5000) {
+            targets.push(`lib-${next}`);
+            next++;
+          }
+          localStorage.setItem('sl-lib-count', String(Math.max(this.libCount(), next)));
+        }
+        const pending = [];
+        files.slice(0, targets.length).forEach((f, i) => {
+          const el = document.getElementById(targets[i]);
+          if (el && el._ingest) el._ingest(f);
+          else pending.push([targets[i], f]);
+          names[targets[i]] = f.name;
+        });
+        if (pending.length) {
+          // slots beyond the current block don't exist yet — retry after the
+          // fileNames update below forces the gallery to grow and re-render.
+          const retry = (tries) => {
+            const left = pending.filter(([id, f]) => {
+              const el = document.getElementById(id);
+              if (el && el._ingest) { el._ingest(f); return false; }
+              return true;
+            });
+            pending.length = 0;
+            pending.push(...left);
+            if (left.length && tries > 0) setTimeout(() => retry(tries - 1), 200);
+          };
+          setTimeout(() => retry(15), 200);
+        }
+      } else {
+        // Single file. When the drop hit the reorder overlay, the slot's own
+        // drop handler never fires — ingest it ourselves and stop the event so
+        // the overlay's reorder handler (and the host editor) don't hijack it.
+        if (viaOverlay) {
+          e.preventDefault();
+          e.stopPropagation();
+          if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+          if (slotEl._ingest) slotEl._ingest(files[0]);
+        }
+        names[slotEl.id] = files[0].name;
+      }
+      localStorage.setItem('sl-filenames', JSON.stringify(names));
+      this.setState({ fileNames: names });
+    };
+    document.addEventListener('drop', this._onDropCapture, true);
+
+    // Allow the drop over an archive gallery row (a dragover must preventDefault
+    // for 'drop' to fire). Capture phase, so it beats any host dragover too.
+    this._onDragOverCapture = (e) => {
+      if (this.state.page !== 'index') return;
+      const path = e.composedPath ? e.composedPath() : [];
+      const rowEl = path.find((n) => n.getAttribute && n.getAttribute('data-proj-drop'));
+      if (!rowEl) return;
+      const dt = e.dataTransfer;
+      if (dt && Array.prototype.indexOf.call(dt.types || [], 'Files') >= 0) {
+        e.preventDefault();
+        dt.dropEffect = 'copy';
+      }
+    };
+    document.addEventListener('dragover', this._onDragOverCapture, true);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._ratioTimer);
+    clearInterval(this._filledTimer);
+    window.removeEventListener('keydown', this._onKeyDown);
+    window.removeEventListener('resize', this._onResize);
+    document.removeEventListener('drop', this._onDropCapture, true);
+    document.removeEventListener('dragover', this._onDragOverCapture, true);
+  }
+
+  // Fill a gallery from a set of dropped files, starting at its first empty
+  // slot (append, never overwrite). Grows the gallery with fresh slot ids and
+  // retries ingest for slots that haven't mounted yet.
+  ingestFilesIntoProject(pid, files) {
+    if (!pid || !files || !files.length) return;
+    const names = { ...this.state.fileNames };
+    const order = this.getProjOrder(pid, this.projCount(pid));
+    const isFilled = (id) => {
+      if (names[id]) return true;
+      const el = document.getElementById(id);
+      return !!(el && el.hasAttribute('data-filled'));
+    };
+    let start = order.findIndex((id) => !isFilled(id));
+    if (start < 0) start = order.length;
+    const targets = order.slice(start);
+    let next = order.length;
+    while (targets.length < files.length && next < 950) {
+      targets.push(`proj-${pid}-${next}`);
+      next++;
+    }
+    const pending = [];
+    files.slice(0, targets.length).forEach((f, i) => {
+      const el = document.getElementById(targets[i]);
+      if (el && el._ingest) el._ingest(f);
+      else pending.push([targets[i], f]);
+      names[targets[i]] = f.name;
+    });
+    localStorage.setItem('sl-filenames', JSON.stringify(names));
+    this.setState({ fileNames: names });
+    if (pending.length) {
+      const flush = (tries) => {
+        const left = pending.filter(([id, f]) => {
+          const el = document.getElementById(id);
+          if (el && el._ingest) { el._ingest(f); return false; }
+          return true;
+        });
+        pending.length = 0;
+        pending.push(...left);
+        if (left.length && tries > 0) setTimeout(() => flush(tries - 1), 200);
+      };
+      setTimeout(() => flush(20), 250);
+    }
+  }
+
+  componentDidUpdate() {
+    // Snap the slideshow onto a real filled slide following the 2-hotel /
+    // 2-arch / 1-product order, when the current index isn't part of it.
+    if (this.state.page === 'home' && this.state.mode === 'single') {
+      const order = this._slideOrder || [];
+      if (order.length && order.indexOf(this.state.index) < 0) {
+        this.setState({ index: order[0] });
+        return;
+      }
+    }
+    // Sync frame ratios immediately on every state change (arrow nav,
+    // view switches) so the landing frame never shows the previous
+    // image's orientation while waiting for the polling tick.
+    if (this._syncRatios) {
+      this._syncRatios();
+      // once more next frame: the slot's shadow img may swap src slightly
+      // after our render
+      requestAnimationFrame(this._syncRatios);
+    }
+  }
+
+  // Slideshow order: images in a random-within-category shuffle, sequenced
+  // 2 HOTEL, 2 ARCHITECTURE, 1 PRODUCT, repeating; leftovers appended.
+  // Category comes from each image's filename. Memoized on the filled set so
+  // the order stays stable between renders (no reshuffle on every nav).
+  buildSlideOrder(images) {
+    const names = this.state.fileNames || {};
+    const filled = this._filledSet || new Set();
+    const isFilled = (img) => {
+      if (filled.has(img.slotId)) return true;
+      if (names[img.slotId]) return true;
+      const el = document.getElementById(img.slotId);
+      return !!(el && el.hasAttribute('data-filled'));
+    };
+    const pool = images.filter(isFilled);
+    const src = pool.length ? pool : [];
+    const key = src.map((img) => img.slotId).join('|');
+    if (this._slideCache && this._slideCache.key === key) return this._slideCache.order;
+    // Category comes from the slot's fixed wall position (gridCats), so the
+    // 2-2-1 sequence works even when filenames are missing; a parsed filename,
+    // when present, still wins.
+    const catOf = (img) => {
+      const meta = this.parseFileName(names[img.slotId] || '');
+      if (meta) return meta.category;
+      const c = String(img.cat || '').toLowerCase();
+      if (c.indexOf('hotel') >= 0) return 'hotel';
+      if (c.indexOf('arch') >= 0 || c.indexOf('interior') >= 0) return 'architecture-and-interiors';
+      if (c.indexOf('product') >= 0) return 'product';
+      return '';
+    };
+    const buckets = { hotel: [], arch: [], product: [], other: [] };
+    src.forEach((img) => {
+      const c = catOf(img);
+      if (c === 'hotel') buckets.hotel.push(img.id);
+      else if (c === 'architecture-and-interiors') buckets.arch.push(img.id);
+      else if (c === 'product') buckets.product.push(img.id);
+      else buckets.other.push(img.id);
+    });
+    const shuffle = (arr, seed) => {
+      let s = seed;
+      for (let i = arr.length - 1; i > 0; i--) {
+        s = (s * 9301 + 49297) % 233280;
+        const j = Math.floor((s / 233280) * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    };
+    shuffle(buckets.hotel, 12345);
+    shuffle(buckets.arch, 67890);
+    shuffle(buckets.product, 24680);
+    shuffle(buckets.other, 13579);
+    const seq = [];
+    const take = (b, n) => { for (let k = 0; k < n && b.length; k++) seq.push(b.shift()); };
+    while (buckets.hotel.length || buckets.arch.length || buckets.product.length) {
+      take(buckets.hotel, 2);
+      take(buckets.arch, 2);
+      take(buckets.product, 1);
+    }
+    seq.push(...buckets.other);
+    const order = seq.length ? seq : images.map((im) => im.id);
+    this._slideCache = { key, order };
+    return order;
+  }
+
+  projectDefs = [
+    { id: 'p1', year: 2025, title: 'ARCHITECTURE 2025', cat: 'ARCHITECTURE' },
+    { id: 'p2', year: 2025, title: 'DRILL STUDIO / BVLGARI', cat: 'PRODUCT' },
+    { id: 'p3', year: 2025, title: 'THE PILATES ROOM', cat: 'INTERIOR' },
+    { id: 'p4', year: 2024, title: 'ARCHITECTURE', cat: 'ARCHITECTURE' },
+    { id: 'p5', year: 2024, title: 'ARTWORK PHOTOGRAPHY', cat: 'ARTWORK' },
+    { id: 'p6', year: 2024, title: 'PORTRAITS', cat: 'PORTRAIT' },
+    { id: 'p7', year: 2023, title: 'ARCHITECTURE', cat: 'ARCHITECTURE' },
+    { id: 'p8', year: 2023, title: 'ARTWORK PHOTOGRAPHY', cat: 'ARTWORK' },
+    { id: 'p9', year: 2023, title: 'PORTRAITS', cat: 'PORTRAIT' },
+    { id: 'p10', year: 2023, title: 'PRODUCT', cat: 'PRODUCT' },
+    { id: 'p11', year: 2022, title: 'ARCHITECTURE', cat: 'ARCHITECTURE' },
+    { id: 'p12', year: 2022, title: 'ARTWORK PHOTOGRAPHY', cat: 'ARTWORK' },
+    { id: 'p13', year: 2022, title: 'PRODUCT', cat: 'PRODUCT' },
+    { id: 'p14', year: 2021, title: 'ARCHITECTURE', cat: 'ARCHITECTURE' },
+    { id: 'p15', year: 2021, title: 'PRODUCT PHOTOGRAPHY', cat: 'PRODUCT' },
+    { id: 'p16', year: 2020, title: 'ARCHITECTURE', cat: 'ARCHITECTURE' },
+    { id: 'p17', year: 2020, title: 'PRODUCT PHOTOGRAPHY', cat: 'PRODUCT' },
+    { id: 'p18', year: 2020, title: 'ARTWORK PHOTOGRAPHY', cat: 'ARTWORK' },
+    { id: 'p19', year: 2019, title: 'ARCHITECTURE', cat: 'ARCHITECTURE' },
+    { id: 'p20', year: 2019, title: 'PRODUCT PHOTOGRAPHY', cat: 'PRODUCT' },
+    { id: 'p21', year: 2018, title: 'ARCHITECTURE', cat: 'ARCHITECTURE' },
+    { id: 'p22', year: 2018, title: 'PRODUCT PHOTOGRAPHY', cat: 'PRODUCT' },
+    { id: 'p23', year: 2017, title: 'FABIEN CAPPELLO / SALA DE LECTURA', cat: 'INTERIOR' },
+    { id: 'p24', year: 2017, title: 'PRODUCT PHOTOGRAPHY', cat: 'PRODUCT' },
+  ];
+
+  // Baked product catalogue — the 27 product photos that ship IN this project.
+  // Keyed on p2 gallery slots so the PRODUCT category + its images are the
+  // SAME on every device (no per-browser localStorage dependency). User drops
+  // still override any slot.
+  static DEFAULT_FILENAMES = {};
+  static DEFAULT_SRC = {};
+
+
+  videoIds = ['CbCC41atlAU', 'i6jSG-1WQQo', '6vNmhN8E7DM', 'qbi6Pvlt-hg', 'shcUKY1VQ10'];
+
+  getVideoOrder() {
+    const saved = this.state.videoOrder ||
+      JSON.parse(localStorage.getItem('sl-video-order') || 'null');
+    if (!saved) return [...this.videoIds];
+    // keep saved order, drop unknown ids, append any new ids
+    const known = saved.filter((id) => this.videoIds.includes(id));
+    const added = this.videoIds.filter((id) => !known.includes(id));
+    return [...known, ...added];
+  }
+
+  moveVideo(fromId, toId) {
+    if (fromId === toId) return;
+    const order = this.getVideoOrder();
+    const from = order.indexOf(fromId);
+    const to = order.indexOf(toId);
+    order.splice(to, 0, order.splice(from, 1)[0]);
+    localStorage.setItem('sl-video-order', JSON.stringify(order));
+    this.setState({ videoOrder: order });
+  }
+
+  openMenu = () => this.setState({ menuOpen: true });
+  closeMenu = () => this.setState({ menuOpen: false });
+
+  // ---- Lightbox with prev/next over a list of slot ids ----
+  _slotSrc(slotId) {
+    const slot = document.getElementById(slotId);
+    const im = slot && slot.shadowRoot && slot.shadowRoot.querySelector('.frame img');
+    return (im && im.getAttribute('src')) || null;
+  }
+  openLightboxList = (slotIds, idx) => {
+    const src = this._slotSrc(slotIds[idx]);
+    if (!src) return;
+    const nm = this.displayNameOf(this.state.fileNames[slotIds[idx]] || '');
+    this.setState({ lightboxSlots: slotIds, lightboxIdx: idx, lightboxSrc: src, lightboxName: nm });
+  };
+  stepLightbox = (delta) => this.setState((s) => {
+    const list = s.lightboxSlots;
+    if (!list || !list.length) return {};
+    const n = list.length;
+    const idx = (s.lightboxIdx + delta + n) % n;
+    const src = this._slotSrc(list[idx]);
+    if (!src) return {};
+    return { lightboxIdx: idx, lightboxSrc: src, lightboxName: this.displayNameOf(s.fileNames[list[idx]] || '') };
+  });
+  closeLightbox = () => this.setState({ lightboxSrc: null, lightboxSlots: null, lightboxName: '' });
+
+  goHome = () => this.setState({ page: 'home', mode: 'single', menuOpen: false });
+  prevImg = () => this.setState((s) => {
+    const order = this._slideOrder || [];
+    if (!order.length) return { index: (s.index - 1 + this.images.length) % this.images.length };
+    let pos = order.indexOf(s.index);
+    if (pos < 0) pos = 0;
+    return { index: order[(pos - 1 + order.length) % order.length] };
+  });
+  nextImg = () => this.setState((s) => {
+    const order = this._slideOrder || [];
+    if (!order.length) return { index: (s.index + 1) % this.images.length };
+    let pos = order.indexOf(s.index);
+    if (pos < 0) pos = 0;
+    return { index: order[(pos + 1) % order.length] };
+  });
+  gotoIndex = () => this.setState({ page: 'index', menuOpen: false });
+
+  // ---- Index 2.0 (category browsing from filenames) ----
+  gotoIndex2 = () => this.setState({ page: 'index2', cat2: null, filter2: {}, menuOpen: false, lightboxSrc: null });
+  openCat2 = (key) => this.setState({ cat2: key, filter2: {} });
+  backToCats2 = () => this.setState({ cat2: null, filter2: {} });
+  setFilter2 = (type, val) => this.setState((s) => {
+    const f = { ...s.filter2 };
+    if (f[type] === val) delete f[type]; else f[type] = val;
+    return { filter2: f };
+  });
+
+  // Known shooting locations (longest-prefix wins; add new ones here freely).
+  static LOCATIONS = [
+    'mexico-city', 'valle-de-bravo', 'todos-santos', 'playa-del-carmen',
+    'santo-domingo', 'puerto-escondido', 'mexico', 'oaxaca', 'malinalco',
+    'tepoztlan', 'xochimilco', 'tulum', 'honduras', 'roatan', 'copenhagen',
+    'guadalajara', 'monterrey', 'cdmx', 'malmo', 'stockholm',
+  ];
+
+  // Parse a filename into {category, location, project}.
+  // PREFERRED (fully automatic, no vocabulary): underscores separate the
+  // fields, dashes join words inside a field —
+  //   category_location_project_id.ext
+  //   e.g. architecture-photography_mexico-city_fabien-cappello_3370.jpg
+  // Any new category/location/project is picked up with zero maintenance.
+  // LEGACY fallback (all-dashes, no underscore): location is matched against
+  // the LOCATIONS vocabulary so existing files keep grouping correctly.
+  parseFileName(fn) {
+    // PREFERRED: folder path inside images/ carries the meaning —
+    //   category/location/project/anything.jpg
+    // The image file itself can be named anything at all. Deeper nesting is
+    // fine; only the first three folders are read.
+    const raw = String(fn || '').trim();
+    // PREFERRED naming: double dash separates the three fields, single dashes
+    // join words inside a field —
+    //   category--location--client-and-name.jpg
+    //   e.g. product-photography--mexico-city--mezcal-amores-01.jpg
+    // A trailing image number on the last field is ignored.
+    const dd = raw.replace(/\.[^.]+$/, '').trim().toLowerCase();
+    if (dd.includes('--')) {
+      const f = dd.split('--').map((x) => x.trim()).filter(Boolean);
+      const category = (f[0] || '').replace(/-?photography$/, '') || f[0];
+      if (!category) return null;
+      const project = (f[2] || '').replace(/[-_]?\d+$/, '');
+      return {
+        category: this.normalizeCategory(category),
+        location: f[1] || '',
+        project,
+      };
+    }
+    if (raw.includes('/')) {
+      const parts = raw.split('/').map((x) => x.trim().toLowerCase()).filter(Boolean);
+      const folders = parts.slice(0, -1); // last part is always the image file
+      if (folders.length) {
+        const [category, location, project] = folders;
+        return {
+          category: this.normalizeCategory((category || '').replace(/-?photography$/, '') || category),
+          location: location || '',
+          project: project || '',
+        };
+      }
+    }
+    const base = raw.replace(/\.[^.]+$/, '').trim().toLowerCase();
+    if (base.includes('_')) {
+      const f = base.split('_').map((x) => x.trim()).filter(Boolean);
+      let category = (f[0] || '').replace(/-?photography$/, '') || f[0];
+      if (!category) return null;
+      const field = (x) => (x && !/^\d+$/.test(x) ? x : '');
+      return { category: this.normalizeCategory(category), location: field(f[1]), project: field(f[2]) };
+    }
+    let t = base.split('-').map((x) => x.trim()).filter(Boolean);
+    if (t.length < 3) return null;
+    const pi = t.indexOf('photography');
+    let category, rest;
+    if (pi >= 0) { category = t.slice(0, pi).join('-'); rest = t.slice(pi + 1); }
+    else { category = t[0]; rest = t.slice(1); }
+    if (!category) return null;
+    while (rest.length && /^\d+$/.test(rest[rest.length - 1])) rest.pop(); // drop image numbers
+    if (rest[0] === 'otro') rest.shift(); // "other" qualifier, not a location
+    if (!rest.length) return null;
+    const restStr = rest.join('-');
+    const locs = Component.LOCATIONS.slice().sort((a, b) => b.split('-').length - a.split('-').length);
+    let location = '', project = restStr;
+    for (const L of locs) {
+      if (restStr === L || restStr.startsWith(L + '-')) {
+        location = L;
+        project = restStr.slice(L.length).replace(/^-/, '');
+        break;
+      }
+    }
+    return { category: this.normalizeCategory(category), location, project };
+  }
+
+  // Fold near-duplicate category spellings into one canonical bucket so a stray
+  // filename doesn't spawn its own category. Any "architecture…" variant
+  // (architecture, architecture-and-interior, architecture-and-interiors) maps
+  // to a single ARCHITECTURE AND INTERIORS category.
+  normalizeCategory(cat) {
+    const c = String(cat || '').trim();
+    if (/^architecture/.test(c) || /^interior/.test(c)) return 'architecture-and-interiors';
+    return c;
+  }
+
+  // ---- images/manifest.json is the published source of truth ----
+  // Every file listed there is a REAL file in images/, named
+  // category_location_project_nn.jpg — so the archive builds itself and the
+  // site is fully portable (no browser storage). Adding photos later = drop
+  // correctly-named files in images/ and add their names to manifest.json.
+  loadManifest() {
+    fetch('./images/manifest.json', { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((list) => {
+        if (!Array.isArray(list) || !list.length) return;
+        const names = {};
+        const src = {};
+        list.forEach((fn, i) => {
+          const id = 'lib-mf-' + i;
+          names[id] = fn;
+          src[id] = './images/' + fn;
+        });
+        this._manifestSrc = src;
+        this.setState((s) => ({ manifestCount: list.length, fileNames: { ...s.fileNames, ...names } }));
+      })
+      .catch(() => {});
+  }
+
+  // Visitor-facing caption for a filename: project field only.
+  displayNameOf(fn) {
+    const meta = this.parseFileName(fn || '');
+    const proj = meta && meta.project ? meta.project.replace(/-/g, ' ').toUpperCase() : '';
+    return proj || String(fn || '').replace(/\.[^.]+$/, '');
+  }
+
+  srcFor(slotId) {
+    return (this._manifestSrc && this._manifestSrc[slotId]) || Component.DEFAULT_SRC[slotId] || '';
+  }
+
+  buildCatalog() {
+    const names = this.state.fileNames || {};
+    const byCat = {};
+    const keys = Object.keys(names);
+    // Published files (images/manifest.json) and galleries still living in this
+    // browser BOTH build the archive, so nothing the user has added disappears.
+    // A project the manifest already covers is taken from the manifest only —
+    // that's what stops the same photos appearing twice in one gallery.
+    const pairKey = (m) => `${m.category}|${m.project}`;
+    const claimed = new Set();
+    keys.forEach((k) => {
+      if (!k.startsWith('lib-mf-')) return;
+      const m = this.parseFileName(names[k]);
+      if (m) claimed.add(pairKey(m));
+    });
+    keys.forEach((slotId) => {
+      // Library uploads and published files (both lib-) build the
+      // galleries; wall + preview slots are presentation, not source.
+      if (!slotId.startsWith('lib-') && !slotId.startsWith('proj-')) return;
+      if (!slotId.startsWith('lib-mf-')) {
+        const m = this.parseFileName(names[slotId]);
+        if (m && claimed.has(pairKey(m))) return;
+      }
+      const meta = this.parseFileName(names[slotId]);
+      if (!meta) return;
+      const key = meta.category.toLowerCase();
+      if (!byCat[key]) byCat[key] = { rawCat: meta.category, slots: [] };
+      byCat[key].slots.push({ slotId, ...meta });
+    });
+    return byCat;
+  }
+
+  getWallOrder() {
+    const saved = this.state.wallOrder ||
+      JSON.parse(localStorage.getItem('sl-wall-order') || 'null');
+    const ids = this.images.map((img) => img.slotId);
+    if (!saved) return ids;
+    const known = saved.filter((id) => ids.includes(id));
+    const added = ids.filter((id) => !known.includes(id));
+    return [...known, ...added];
+  }
+
+  moveWallCell(fromId, toId) {
+    if (fromId === toId) return;
+    const order = this.getWallOrder();
+    order.splice(order.indexOf(toId), 0, order.splice(order.indexOf(fromId), 1)[0]);
+    localStorage.setItem('sl-wall-order', JSON.stringify(order));
+    this.setState({ wallOrder: order });
+  }
+
+  commitRename(projId, currentTitle) {
+    // Guard against stale blur/unmount commits from a previous editor:
+    // only the project actually being edited may write.
+    if (this.state.editingProj !== projId) return;
+    const v = this.state.editingValue.trim().toUpperCase();
+    const overrides = { ...this.state.titleOverrides };
+    if (!v || v === String(currentTitle).toUpperCase()) {
+      // empty or unchanged: just close, don't record an override
+      this.setState({ editingProj: null });
+      return;
+    }
+    overrides[projId] = v;
+    localStorage.setItem('sl-title-overrides', JSON.stringify(overrides));
+    this.setState({ editingProj: null, titleOverrides: overrides });
+  }
+
+  addProject(year) {
+    const id = 'u' + Date.now().toString(36);
+    const proj = { id, year, title: 'NEW GALLERY', cat: '' };
+    const userProjects = [...this.state.userProjects, proj];
+    localStorage.setItem('sl-user-projects', JSON.stringify(userProjects));
+    // open the year and drop straight into rename so it's easy to name.
+    this.setState({ userProjects, openYear: year, editingProj: id, editingValue: proj.title });
+  }
+
+  removeProject(projId, title) {
+    if (!confirm(`Remove the gallery "${title}"? Its images will also be cleared. This cannot be undone.`)) return;
+    this._clearSlots(`proj-${projId}-`);
+    localStorage.removeItem(`sl-proj-order-${projId}`);
+    const isUser = this.state.userProjects.some((p) => p.id === projId);
+    const patch = {};
+    if (isUser) {
+      const userProjects = this.state.userProjects.filter((p) => p.id !== projId);
+      localStorage.setItem('sl-user-projects', JSON.stringify(userProjects));
+      patch.userProjects = userProjects;
+    } else {
+      const removedProjects = [...new Set([...this.state.removedProjects, projId])];
+      localStorage.setItem('sl-removed-projects', JSON.stringify(removedProjects));
+      patch.removedProjects = removedProjects;
+    }
+    // drop any rename/override tied to it
+    if (this.state.titleOverrides[projId]) {
+      const overrides = { ...this.state.titleOverrides };
+      delete overrides[projId];
+      localStorage.setItem('sl-title-overrides', JSON.stringify(overrides));
+      patch.titleOverrides = overrides;
+    }
+    const orders = { ...this.state.projOrders };
+    delete orders[projId];
+    patch.projOrders = orders;
+    this.setState(patch);
+  }
+
+  // Galleries start at 50 slots and grow by 50 whenever the last slot of
+  // the current block is filled (live DOM check, or a recorded drop name).
+  projCount(projId) {
+    let count = 50;
+    while (count < 950) {
+      const id = `proj-${projId}-${count - 1}`;
+      const el = document.getElementById(id);
+      if ((el && el.hasAttribute('data-filled')) || this.state.fileNames[id]) count += 50;
+      else break;
+    }
+    return count;
+  }
+
+  getProjOrder(projId, count) {
+    const key = `sl-proj-order-${projId}`;
+    const ids = Array.from({ length: count }, (_, i) => `proj-${projId}-${i}`);
+    const saved = this.state.projOrders[projId] ||
+      JSON.parse(localStorage.getItem(key) || 'null');
+    if (!saved) return ids;
+    const known = saved.filter((id) => ids.includes(id));
+    const added = ids.filter((id) => !known.includes(id));
+    return [...known, ...added];
+  }
+
+  moveProjCell(projId, count, fromId, toId) {
+    if (fromId === toId) return;
+    const order = this.getProjOrder(projId, count);
+    order.splice(order.indexOf(toId), 0, order.splice(order.indexOf(fromId), 1)[0]);
+    localStorage.setItem(`sl-proj-order-${projId}`, JSON.stringify(order));
+    this.setState((s) => ({ projOrders: { ...s.projOrders, [projId]: order } }));
+  }
+
+  getPrevOrder(projId) {
+    const ids = [0, 1, 2, 3].map((n) => `idxprev-${projId}-${n}`);
+    const saved = this.state.prevOrders[projId] ||
+      JSON.parse(localStorage.getItem(`sl-prev-order-${projId}`) || 'null');
+    if (!saved) return ids;
+    const known = saved.filter((id) => ids.includes(id));
+    return [...known, ...ids.filter((id) => !known.includes(id))];
+  }
+
+  movePrevCell(projId, fromId, toId) {
+    if (fromId === toId) return;
+    const order = this.getPrevOrder(projId);
+    order.splice(order.indexOf(toId), 0, order.splice(order.indexOf(fromId), 1)[0]);
+    localStorage.setItem(`sl-prev-order-${projId}`, JSON.stringify(order));
+    this.setState((s) => ({ prevOrders: { ...s.prevOrders, [projId]: order } }));
+  }
+
+  // live aspect ratio of a slot's dropped image (or null if empty)
+  slotRatio(slotId) {
+    const slot = document.getElementById(slotId);
+    const img = slot && slot.shadowRoot && slot.shadowRoot.querySelector('.frame img');
+    return img && img.naturalWidth && img.naturalHeight
+      ? img.naturalWidth / img.naturalHeight : null;
+  }
+  gotoAbout = () => this.setState({ page: 'about', menuOpen: false });
+  gotoContact = () => this.setState({ page: 'contact', menuOpen: false });
+  gotoVideo = () => this.setState({ page: 'video', menuOpen: false });
+
+  // Clear mounted slots through the component's own delete control so the
+  // in-memory store stays authoritative — never rewrite the sidecar file
+  // directly (a stale fetch + rewrite can destroy other galleries' images).
+  _clearSlots(prefix) {
+    document.querySelectorAll('image-slot').forEach((el) => {
+      if (!el.id || !el.id.startsWith(prefix)) return;
+      const btn = el.shadowRoot && el.shadowRoot.querySelector('[data-act="clear"]');
+      if (btn) btn.click();
+    });
+    // Clicking the control only reaches slots currently mounted — scrolled-off
+    // or unrendered slots keep their stored image, which is why clearing used
+    // to leave photos behind. Sweep the store for the whole prefix too.
+    this._purgeStored(prefix);
+    const names = { ...this.state.fileNames };
+    Object.keys(names).forEach((k) => { if (k.startsWith(prefix)) delete names[k]; });
+    localStorage.setItem('sl-filenames', JSON.stringify(names));
+    this.setState({ fileNames: names });
+  }
+
+  _purgeStored(prefix) {
+    try {
+      const req = indexedDB.open('image-slots-store', 1);
+      req.onsuccess = () => {
+        const db = req.result;
+        if (!db.objectStoreNames.contains('slots')) return;
+        const os = db.transaction('slots', 'readwrite').objectStore('slots');
+        const kr = os.getAllKeys();
+        kr.onsuccess = () => {
+          (kr.result || []).forEach((k) => { if (String(k).startsWith(prefix)) os.delete(k); });
+        };
+      };
+    } catch (e) { /* storage unavailable — mounted slots were still cleared */ }
+  }
+
+
+  clearProjectImages = () => {
+    const projId = this.state.activeProjectId;
+    if (!projId) return;
+    if (!confirm('Remove all images from this gallery? This cannot be undone.')) return;
+    this._clearSlots(`proj-${projId}-`);
+    localStorage.removeItem(`sl-proj-order-${projId}`);
+    this.setState((s) => {
+      const orders = { ...s.projOrders };
+      delete orders[projId];
+      return { projOrders: orders };
+    });
+  };
+
+  // Wipe gallery, wall, and index-preview images only — keeping the About
+  // portrait, video thumbnails (those are pulled live from YouTube, never
+  // stored), and any other custom slot. Gallery structure (project names) is
+  // kept; only the images in those buckets are erased.
+  clearAllGalleries = () => {
+    if (!confirm('Erase every gallery, wall, and preview image? (About portrait and video thumbnails are kept.) This cannot be undone.')) return;
+    const WIPE = (k) => /^(proj|grid|idxprev)-/.test(k);
+    // 1. Clear matching mounted slots through their own delete control.
+    document.querySelectorAll('image-slot').forEach((el) => {
+      if (!el.id || !WIPE(el.id)) return;
+      const btn = el.shadowRoot && el.shadowRoot.querySelector('[data-act="clear"]');
+      if (btn) btn.click();
+    });
+    // 2. Delete matching keys from IndexedDB, leaving all others intact.
+    const finishLocal = () => {
+      // Rewrite the sidecar mirror to drop the wiped keys, keep the rest.
+      try {
+        const w = window.omelette && window.omelette.writeFile;
+        if (w) {
+          fetch('.image-slots.state.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({})).then((disk) => {
+            const keep = {};
+            Object.keys(disk || {}).forEach((k) => { if (!WIPE(k)) keep[k] = disk[k]; });
+            Promise.resolve(w('.image-slots.state.json', JSON.stringify(keep))).catch(() => {});
+          });
+        }
+      } catch (e) {}
+      const names = { ...this.state.fileNames };
+      Object.keys(names).forEach((k) => { if (WIPE(k)) delete names[k]; });
+      localStorage.setItem('sl-filenames', JSON.stringify(names));
+      localStorage.removeItem('sl-wall-order');
+      localStorage.removeItem('image-slots-deleted');
+      Object.keys(localStorage).forEach((k) => { if (k.startsWith('sl-proj-order-')) localStorage.removeItem(k); });
+      setTimeout(() => location.reload(), 120);
+    };
+    try {
+      const req = indexedDB.open('image-slots-store', 1);
+      req.onsuccess = () => {
+        const db = req.result;
+        try {
+          const tx = db.transaction('slots', 'readwrite');
+          const store = tx.objectStore('slots');
+          const keysReq = store.getAllKeys();
+          keysReq.onsuccess = () => {
+            (keysReq.result || []).forEach((k) => { if (WIPE(k)) store.delete(k); });
+          };
+          tx.oncomplete = finishLocal;
+          tx.onerror = tx.onabort = finishLocal;
+        } catch (e) { finishLocal(); }
+      };
+      req.onerror = finishLocal;
+    } catch (e) { finishLocal(); }
+  };
+
+  renderVals() {
+    const s = this.state;
+    const stripExt = (n) => n.replace(/\.[^.]+$/, '');
+    // monospace ≈ 0.62em per char; shrink so the whole name fits the cell
+    // (100cqw = caption width, minus the span's 16px horizontal padding)
+    // Captions shown to visitors: the project field only, spaced + uppercased.
+    // Never the raw technical filename (category prefix / underscores / index).
+    const displayName = (fn) => {
+      const meta = this.parseFileName(fn || '');
+      const proj = meta && meta.project ? meta.project.replace(/-/g, ' ').toUpperCase() : '';
+      return proj || stripExt(fn || '');
+    };
+    const nameFs = (n) => {
+      const len = Math.max(1, stripExt(n).length);
+      return `min(10px, calc((100cqw - 16px) / ${(len * 0.62).toFixed(2)}))`;
+    };
+    const wallOrder = this.images.map((_, i) => i);
+    // deterministic shuffle so cells pop in scattered, not row by row
+    for (let i = wallOrder.length - 1; i > 0; i--) {
+      const j = (i * 7919 + 13) % (i + 1);
+      [wallOrder[i], wallOrder[j]] = [wallOrder[j], wallOrder[i]];
+    }
+    const images = this.images.map((img, i) => ({
+      ...img,
+      shortLabel: '',
+      fileName: displayName(s.fileNames[img.slotId] || ''),
+      hasName: !!s.fileNames[img.slotId],
+      nameFs: nameFs(displayName(s.fileNames[img.slotId] || '')),
+      wallDelay: `${(wallOrder.indexOf(i) * 0.018).toFixed(3)}s`,
+      select: () => this.setState({ index: i, mode: 'single' }),
+      view: (e) => {
+        const slot = document.getElementById(img.slotId);
+        // don't open the lightbox when interacting with the slot's own
+        // controls (Replace/Edit/trash) or while reframing the crop
+        const inControls = e.nativeEvent && e.nativeEvent.composedPath &&
+          e.nativeEvent.composedPath().some((n) =>
+            n.classList && (n.classList.contains('ctl') || n.tagName === 'BUTTON'));
+        if (inControls || (slot && slot.hasAttribute('data-reframe'))) return;
+        const el = slot && slot.shadowRoot && slot.shadowRoot.querySelector('.frame img');
+        const src = el && el.getAttribute('src');
+        if (!src) return; // empty slot: click falls through to upload
+        e.stopPropagation();
+        e.preventDefault();
+        this.setState({ lightboxSrc: src, lightboxName: this.displayNameOf(s.fileNames[img.slotId] || '') });
+      },
+    }));
+    // Clamp: index can outlive a shrinking library (or an emptied one), and an
+    // undefined currentImg would leave the landing slot with no id — anything
+    // dropped there would silently fail to persist.
+    const idx = images.length ? Math.min(Math.max(s.index, 0), images.length - 1) : 0;
+    const currentImg = images[idx] || { slotId: 'lib-0', src: '', label: '', fileName: '', hasName: false };
+    this._slideOrder = this.buildSlideOrder(images);
+
+    // extra galleries from Tweaks: "year: title; year: title"
+    const extraDefs = String(this.props.extraProjects ?? '')
+      .split(';').map((t) => t.trim()).filter(Boolean)
+      .map((entry, i) => {
+        const m = entry.match(/^(\d{4})\s*:\s*(.+)$/);
+        return m ? {
+          id: `x${i}-${m[2].toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+          year: Number(m[1]),
+          title: m[2].toUpperCase(),
+          cat: '',
+        } : null;
+      }).filter(Boolean);
+    // renames from Tweaks: "year: old = new; year: old = new"
+    const renames = String(this.props.renameProjects ?? '')
+      .split(';').map((t) => t.trim()).filter(Boolean)
+      .map((entry) => {
+        const m = entry.match(/^(\d{4})\s*:\s*(.+?)\s*=\s*(.+)$/);
+        return m ? { year: Number(m[1]), from: m[2].trim().toUpperCase(), to: m[3].trim().toUpperCase() } : null;
+      }).filter(Boolean);
+    const applyRename = (p) => {
+      const r = renames.find((r) => r.year === p.year && r.from === p.title.toUpperCase());
+      return r ? { ...p, title: r.to } : p;
+    };
+    const applyOverride = (p) =>
+      s.titleOverrides[p.id] ? { ...p, title: s.titleOverrides[p.id] } : p;
+    const allDefs = [...this.projectDefs, ...extraDefs, ...s.userProjects]
+      .filter((p) => !s.removedProjects.includes(p.id))
+      .map(applyRename).map(applyOverride);
+    const isEditable = !!(window.omelette && window.omelette.writeFile);
+    const extraYears = String(this.props.extraYears ?? '')
+      .split(',').map((t) => parseInt(t.trim(), 10)).filter((y) => y > 1900 && y < 2100);
+    const years = [...new Set([...allDefs.map((p) => p.year), ...extraYears])].sort((a, b) => b - a);
+    const yearGroups = years.map((year) => ({
+      year,
+      isOpen: true,
+      mark: '',
+      toggle: () => this.setState((st) => ({ openYear: st.openYear === year ? null : year })),
+      canEdit: isEditable,
+      addProject: (e) => { e.stopPropagation(); this.addProject(year); },
+      items: allDefs
+        .filter((p) => p.year === year)
+        .map((p) => ({
+          ...p,
+          canEdit: isEditable,
+          panelOpen: s.pinnedProj === p.id,
+          panelDot: s.pinnedProj === p.id ? '#111' : '#cfcbbf',
+          onHover: () => { if (this.state.hoverProj !== p.id) this.setState({ hoverProj: p.id }); },
+          togglePanel: (e) => { e.stopPropagation(); this.setState((st) => ({ pinnedProj: st.pinnedProj === p.id ? null : p.id, hoverProj: null })); },
+          remove: (e) => { e.stopPropagation(); this.removeProject(p.id, p.title); },
+          open: () => {
+            if (this.state.editingProj) return;
+            this.setState({ page: 'project', activeProjectId: p.id, menuOpen: false });
+          },
+          editing: s.editingProj === p.id,
+          notEditing: s.editingProj !== p.id,
+          startEdit: (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            this.setState({ editingProj: p.id, editingValue: p.title });
+          },
+          editValue: s.editingProj === p.id ? s.editingValue : p.title,
+          onEditChange: (e) => this.setState({ editingValue: e.target.value }),
+          onEditKey: (e) => {
+            if (e.key === 'Enter') this.commitRename(p.id, p.title);
+            if (e.key === 'Escape') this.setState({ editingProj: null });
+          },
+          onEditBlur: () => this.commitRename(p.id, p.title),
+          stop: (e) => e.stopPropagation(),
+        })),
+    }));
+
+    const activeDef = allDefs.find((p) => p.id === s.activeProjectId) || allDefs[0];
+    const projSlotIds = activeDef ? this.getProjOrder(activeDef.id, this.projCount(activeDef.id)) : [];
+    const activeProject = activeDef && {
+      ...activeDef,
+      images: projSlotIds.map((slotId, i) => {
+        return {
+          id: slotId,
+          slotId,
+          src: this.srcFor(slotId),
+          fileName: displayName(s.fileNames[slotId] || ''),
+          hasName: !!s.fileNames[slotId],
+          nameFs: nameFs(displayName(s.fileNames[slotId] || '')),
+          opacity: s.dragProj === slotId ? 0.35 : 1,
+          wallDelay: `${(i * 0.018).toFixed(3)}s`,
+          dragStart: (e) => {
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', slotId);
+            this.setState({ dragProj: slotId });
+          },
+          dragOver: (e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; },
+          drop: (e) => {
+            e.preventDefault();
+            if (this.state.dragProj) this.moveProjCell(activeDef.id, this.projCount(activeDef.id), this.state.dragProj, slotId);
+            this.setState({ dragProj: null });
+          },
+          dragEnd: () => this.setState({ dragProj: null }),
+          label: `${activeDef.title} — ${String(i + 1).padStart(2, '0')}`,
+          view: (e) => {
+            const slot = document.getElementById(slotId);
+            const inControls = e && e.nativeEvent && e.nativeEvent.composedPath &&
+              e.nativeEvent.composedPath().some((n) =>
+                n.classList && (n.classList.contains('ctl') || n.tagName === 'BUTTON'));
+            if (inControls || (slot && slot.hasAttribute('data-reframe'))) return;
+            if (e) { e.stopPropagation(); e.preventDefault(); }
+            this.openLightboxList(projSlotIds, i);
+          },
+        };
+      }),
+    };
+
+    const chipStyle = (active) => `font-size:11px;letter-spacing:.1em;padding:6px 12px;border:1px solid ${active ? '#111' : '#ddd9cf'};color:${active ? '#fff' : '#666'};background:${active ? '#111' : 'transparent'};border-radius:1px;white-space:nowrap`;
+    const catalog = this.buildCatalog();
+    const catKeys = Object.keys(catalog).sort();
+    const catList2 = catKeys.map((k) => ({
+      raw: k,
+      label: catalog[k].rawCat.replace(/-/g, ' ').toUpperCase(),
+      countLabel: String(catalog[k].slots.length).padStart(2, '0'),
+      open: () => this.setState({ page: 'index2', cat2: k, filter2: {}, menuOpen: false }),
+    }));
+    // Primary menu nav — always present so the overlay is never blank, even
+    // when no filename-derived categories exist. Categories (catList2) are
+    // shown in addition when available.
+    const menuNav = [
+      // Library is the private upload surface — only shown while editing.
+      ...(window.omelette && window.omelette.writeFile
+        ? [{ id: 'index', label: 'LIBRARY', onClick: this.gotoIndex }] : []),
+      { id: 'video', label: 'VIDEO', onClick: this.gotoVideo },
+      { id: 'about', label: 'ABOUT', onClick: this.gotoAbout },
+      { id: 'contact', label: 'CONTACT', onClick: this.gotoContact },
+    ];
+    // Menu overlay mirrors the desktop index: list every gallery (newest year
+    // first), each opening its project page exactly like clicking it on the
+    // index. VIDEO / ABOUT / CONTACT stay reachable as a secondary group.
+    const menuGalleries = years.flatMap((year) =>
+      allDefs.filter((p) => p.year === year).map((p) => ({
+        id: p.id,
+        label: p.title,
+        onClick: () => {
+          if (this.state.editingProj) return;
+          this.setState({ page: 'project', activeProjectId: p.id, menuOpen: false });
+        },
+      }))
+    );
+    const menuSecondary = [
+      { id: 'video', label: 'VIDEO', onClick: this.gotoVideo },
+      { id: 'about', label: 'ABOUT', onClick: this.gotoAbout },
+      { id: 'contact', label: 'CONTACT', onClick: this.gotoContact },
+    ];
+    const cat2Selected = !!(s.cat2 && catalog[s.cat2]);
+    let cat2Title = '', cat2Chips = [], cat2Cells = [], cat2AllStyle = chipStyle(true);
+    if (cat2Selected) {
+      const bucket = catalog[s.cat2];
+      const f = s.filter2 || {};
+      const uniq = (arr) => [...new Set(arr.filter(Boolean))].sort();
+      const locations = uniq(bucket.slots.map((x) => x.location));
+      const projects = uniq(bucket.slots.map((x) => x.project));
+      cat2Title = bucket.rawCat.replace(/-/g, ' ').toUpperCase();
+      cat2AllStyle = chipStyle(!f.location && !f.project);
+      const listItemStyle = (on) => `font-family:'Jost',Helvetica,sans-serif;text-transform:uppercase;font-size:11px;letter-spacing:.13em;text-align:right;cursor:pointer;padding:5px 0;line-height:1.3;color:${on ? '#111' : '#9c988c'};font-weight:${on ? 600 : 300}`;
+      cat2Chips = projects.map((v) => ({ label: v.replace(/-/g, ' ').toUpperCase(), style: listItemStyle(f.project === v), onClick: () => this.setFilter2('project', v) }));
+      const filtered = f.project
+        ? bucket.slots.filter((x) => (!f.location || x.location === f.location) && x.project === f.project)
+        : [];
+      const cat2SlotIds = filtered.map((x) => x.slotId);
+      cat2Cells = filtered.map((x, i) => ({
+        slotId: x.slotId,
+        src: this.srcFor(x.slotId),
+        label: (x.project || x.category).replace(/-/g, ' ').toUpperCase(),
+        caption: [x.location, x.project].filter(Boolean).join(' · ').replace(/-/g, ' ').toUpperCase(),
+        wallDelay: `${(i * 0.02).toFixed(3)}s`,
+        view: () => this.openLightboxList(cat2SlotIds, i),
+      }));
+    }
+
+    return {
+      page: s.page,
+      isHome: s.page === 'home',
+      isIndex: s.page === 'index',
+      libCount: Object.keys(s.fileNames || {}).filter((k) => k.startsWith('lib-')).length,
+      libProjectCount: (() => {
+        const set = new Set();
+        Object.keys(s.fileNames || {}).forEach((k) => {
+          if (!k.startsWith('lib-')) return;
+          const m = this.parseFileName(s.fileNames[k]);
+          if (m && m.project) set.add(`${m.category}|${m.project}`);
+        });
+        return set.size;
+      })(),
+      libCells: [
+        // Photos published in the repo's images/ folder come first — they are
+        // the ones the live site serves; browser drops fill the empty slots.
+        ...Object.keys(this._manifestSrc || {}),
+        ...Array.from({ length: this.libCount() }, (_, i) => `lib-${i}`),
+      ].map((slotId) => {
+        const fn = (s.fileNames || {})[slotId] || '';
+        const picked = this.isFeatured(slotId);
+        return {
+          slotId,
+          hasName: !!fn,
+          fileName: this.displayNameOf(fn),
+          shortLabel: '',
+          pickBg: picked ? '#111' : 'rgba(253,252,250,.85)',
+          pickColor: picked ? '#fff' : '#cfcbbf',
+          pickBorder: picked ? '#111' : '#d8d4c8',
+          togglePick: (e) => { e.stopPropagation(); this.toggleFeatured(slotId); },
+          src: (this._manifestSrc || {})[slotId] || '',
+        };
+      }),
+      featuredCount: (this.featuredIds() || []).length,
+      addLibSlot: this.addLibSlot,
+      isAbout: s.page === 'about',
+      isContact: s.page === 'contact',
+      isVideo: s.page === 'video',
+      isIndex2: s.page === 'index2',
+      gotoIndex2: this.gotoIndex2,
+      backToCats2: this.backToCats2,
+      cat2Landing: s.page === 'index2' && !cat2Selected,
+      cat2Selected,
+      cat2Empty: catKeys.length === 0,
+      catList2,
+      menuNav,
+      menuGalleries,
+      menuSecondary,
+      cat2Title,
+      cat2Chips,
+      cat2Cells,
+      cat2AllStyle,
+      cat2ClearFilters: () => this.setState({ filter2: {} }),
+      isProject: s.page === 'project',
+      mode: s.mode,
+      isSingle: s.mode === 'single',
+      isGrid: s.mode === 'grid',
+      menuOpen: s.menuOpen,
+      extraMenu: String(this.props.extraMenuItems ?? '')
+        .split(',').map((t) => t.trim()).filter(Boolean)
+        .map((label) => ({ id: label, label })),
+      images,
+      currentImg,
+      currentName: currentImg ? currentImg.fileName : '',
+      currentHasName: !!(currentImg && currentImg.hasName),
+      counterLabel: images.length
+        ? `${String(idx + 1).padStart(2, '0')} / ${String(images.length).padStart(2, '0')}`
+        : '',
+      yearGroups,
+      hoverActive: !!(s.pinnedProj || s.hoverProj),
+      isPinned: !!s.pinnedProj,
+      panelPE: s.pinnedProj ? 'auto' : 'none',
+      panelTitle: (s.pinnedProj || s.hoverProj) ? (allDefs.find((p) => p.id === (s.pinnedProj || s.hoverProj)) || {}).title || '' : '',
+      previewSlots: (s.pinnedProj || s.hoverProj)
+        ? this.getPrevOrder(s.pinnedProj || s.hoverProj).map((slotId) => {
+            const pid = s.pinnedProj || s.hoverProj;
+            return {
+              slotId,
+              label: 'UPLOAD',
+              opacity: s.dragPrev === slotId ? 0.35 : 1,
+              dragStart: (e) => {
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/plain', slotId);
+                this.setState({ dragPrev: slotId });
+              },
+              dragOver: (e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; },
+              drop: (e) => {
+                e.preventDefault();
+                if (this.state.dragPrev) this.movePrevCell(pid, this.state.dragPrev, slotId);
+                this.setState({ dragPrev: null });
+              },
+              dragEnd: () => this.setState({ dragPrev: null }),
+            };
+          })
+        : [],
+      closePanel: () => this.setState({ pinnedProj: null }),
+      clearHover: () => { if (this.state.hoverProj) this.setState({ hoverProj: null }); },
+      activeProject,
+      lightboxOpen: !!s.lightboxSrc,
+      lightboxName: s.lightboxName || '',
+      lightboxHasName: !!s.lightboxName,
+      lightboxImg: s.lightboxSrc
+        ? React.createElement('img', {
+            src: s.lightboxSrc,
+            alt: '',
+            onClick: (e) => e.stopPropagation(),
+            style: {
+              width: 'min(2500px, 96vw)', height: 'min(2500px, 90vh)',
+              objectFit: 'contain',
+              filter: 'drop-shadow(0 30px 60px rgba(0,0,0,.3))',
+            },
+          })
+        : null,
+      closeLightbox: this.closeLightbox,
+      lightboxHasNav: !!(s.lightboxSlots && s.lightboxSlots.length > 1),
+      prevLightbox: (e) => { if (e) e.stopPropagation(); this.stepLightbox(-1); },
+      nextLightbox: (e) => { if (e) e.stopPropagation(); this.stepLightbox(1); },
+      videos: this.getVideoOrder().map((vid, i) => ({
+        id: vid,
+        title: `VIDEO ${String(i + 1).padStart(2, '0')}`,
+        thumbImg: React.createElement('img', {
+          src: `https://img.youtube.com/vi/${vid}/maxresdefault.jpg`,
+          alt: `VIDEO ${String(i + 1).padStart(2, '0')}`,
+          style: { width: '100%', height: '100%', objectFit: 'cover', display: 'block' },
+        }),
+        embed: `https://www.youtube-nocookie.com/embed/${vid}?rel=0&autoplay=1&modestbranding=1`,
+        playing: s.playingVideo === vid,
+        idle: s.playingVideo !== vid,
+        play: () => this.setState({ playingVideo: vid }),
+        opacity: s.dragVideo === vid ? 0.35 : 1,
+        dragStart: (e) => {
+          e.dataTransfer.effectAllowed = 'move';
+          this.setState({ dragVideo: vid, playingVideo: null });
+        },
+        dragOver: (e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; },
+        drop: (e) => {
+          e.preventDefault();
+          if (this.state.dragVideo) this.moveVideo(this.state.dragVideo, vid);
+          this.setState({ dragVideo: null });
+        },
+        dragEnd: () => this.setState({ dragVideo: null }),
+      })),
+      openMenu: this.openMenu,
+      closeMenu: this.closeMenu,
+      goHome: this.goHome,
+      toggleGrid: this.toggleGrid,
+      prevImg: this.prevImg,
+      nextImg: this.nextImg,
+      gotoIndex: this.gotoIndex,
+      clearProjectImages: this.clearProjectImages,
+      clearAllGalleries: this.clearAllGalleries,
+      isEditable: !!(window.omelette && window.omelette.writeFile),
+      gotoAbout: this.gotoAbout,
+      gotoContact: this.gotoContact,
+      gotoVideo: this.gotoVideo,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

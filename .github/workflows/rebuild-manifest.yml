@@ -1,0 +1,38 @@
+name: Rebuild image manifest
+
+on:
+  push:
+    paths:
+      - 'images/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rebuild images/manifest.json
+        run: |
+          node -e "
+          const fs = require('fs');
+          const ok = f => /\.(jpe?g|png|webp|avif)\$/i.test(f);
+          const list = f => fs.existsSync(f) ? fs.readdirSync(f).filter(ok).sort() : [];
+          const files = [
+            ...list('images'),
+            ...list('images/slideshow').map(f => 'slideshow/' + f),
+          ];
+          fs.writeFileSync('images/manifest.json', JSON.stringify(files, null, 1) + '\n');
+          console.log('manifest: ' + files.length + ' images');
+          "
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "manifest bot"
+          git config user.email "actions@github.com"
+          git add images/manifest.json
+          git diff --staged --quiet || git commit -m "rebuild image manifest"
+          git push
