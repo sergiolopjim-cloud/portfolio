@@ -18,13 +18,17 @@ jobs:
       - name: Rebuild images/manifest.json
         run: |
           node -e "
-          const fs = require('fs');
+          const fs = require('fs'), path = require('path');
           const ok = f => /\.(jpe?g|png|webp|avif)\$/i.test(f);
-          const list = f => fs.existsSync(f) ? fs.readdirSync(f).filter(ok).sort() : [];
-          const files = [
-            ...list('images'),
-            ...list('images/slideshow').map(f => 'slideshow/' + f),
-          ];
+          const walk = (dir, base = '') => fs.readdirSync(dir, { withFileTypes: true })
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .flatMap(e => {
+              if (e.name.startsWith('.')) return [];
+              const rel = base ? base + '/' + e.name : e.name;
+              if (e.isDirectory()) return walk(path.join(dir, e.name), rel);
+              return ok(e.name) ? [rel] : [];
+            });
+          const files = fs.existsSync('images') ? walk('images') : [];
           fs.writeFileSync('images/manifest.json', JSON.stringify(files, null, 1) + '\n');
           console.log('manifest: ' + files.length + ' images');
           "

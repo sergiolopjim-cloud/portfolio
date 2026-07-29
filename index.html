@@ -897,7 +897,9 @@ class Component extends DCLogic {
     //   category--location--client-and-name.jpg
     //   e.g. product-photography--mexico-city--mezcal-amores-01.jpg
     // A trailing image number on the last field is ignored.
-    const dd = raw.replace(/\.[^.]+$/, '').trim().toLowerCase();
+    // Folders are free: photos may sit in any subfolder of images/ (by year, by
+    // category, however the user files them). Only the FILE name is parsed.
+    const dd = raw.split('/').pop().replace(/\.[^.]+$/, '').trim().toLowerCase();
     if (dd.includes('--')) {
       const f = dd.split('--').map((x) => x.trim()).filter(Boolean);
       const category = (f[0] || '').replace(/-?photography$/, '') || f[0];
