@@ -281,6 +281,7 @@
 
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;extraMenuItems&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Menu&quot;,&quot;description&quot;:&quot;Extra menu entries, comma-separated (e.g. \&quot;PRINTS, JOURNAL\&quot;). Each appears in the fullscreen menu below CONTACT.&quot;},&quot;extraYears&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;2026&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Index&quot;,&quot;description&quot;:&quot;Extra years for the index, comma-separated (e.g. \&quot;2016, 2015\&quot;).&quot;},&quot;extraProjects&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Index&quot;,&quot;description&quot;:&quot;Extra galleries, semicolon-separated as year:title (e.g. \&quot;2025: HOTEL HABITA; 2016: EARLY WORK\&quot;). Each gets its own 20-slot gallery page.&quot;},&quot;renameProjects&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Index&quot;,&quot;description&quot;:&quot;Rename galleries, semicolon-separated as year: old = new (e.g. \&quot;2023: ARCHITECTURE = BUILT WORKS; 2024: PORTRAITS = PEOPLE\&quot;).&quot;}}">
+const LIVE_BASE = 'https://sergiolopjim-cloud.github.io/portfolio/';
 const CATS = ['ARCHITECTURE','INTERIOR','PRODUCT','ARTWORK','PORTRAIT'];
 const TONES = [
   ['#dcdad3','#e8e6df'],['#111214','#26282b'],['#d7ded8','#e6ece7'],
@@ -947,14 +948,12 @@ class Component extends DCLogic {
   // page is served from anywhere OTHER than the live site (local preview,
   // design tool), read the manifest and the photos from the live site so the
   // working copy always shows exactly what visitors see.
-  static LIVE_BASE = 'https://sergiolopjim-cloud.github.io/portfolio/';
-
   imageBase() {
     try {
       const h = location.hostname;
       if (h === 'sergiolopjim-cloud.github.io' || /sergiolopez/i.test(h)) return './';
     } catch (e) {}
-    return Component.LIVE_BASE;
+    return LIVE_BASE;
   }
 
   loadManifest() {
