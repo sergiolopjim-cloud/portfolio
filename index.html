@@ -23,13 +23,20 @@
   .navlink{cursor:pointer}
   .navlink:hover{opacity:.55}
   .home-brand,.topnav{padding:8px 14px;background:rgba(253,252,250,.82);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border-radius:3px}
+  /* Tablet / small laptop: let the category nav wrap and shrink so it never
+     runs into the centred wordmark. */
+  @media (max-width:1000px){
+    .topnav{gap:10px !important;flex-wrap:wrap;justify-content:flex-end;max-width:34vw;padding:6px 10px !important}
+    .topnav .cap{font-size:9px !important;letter-spacing:.1em !important}
+  }
   @media (max-width:640px){
     .home-brand{gap:5px !important;top:16px !important}
     .home-brand>span{gap:1px !important}
     .home-brand .cap:first-child{font-size:10px !important}
     .home-brand .cap:last-child{font-size:7px !important}
     .home-brand svg{width:13px !important;height:13px !important}
-    .topnav{top:14px !important;right:14px !important;gap:9px !important;flex-wrap:wrap;justify-content:flex-end;max-width:64vw;padding:6px 10px !important}
+    /* Phones: the nav moves onto its own centred line under the wordmark. */
+    .topnav{top:58px !important;left:0 !important;right:0 !important;gap:12px !important;flex-wrap:wrap;justify-content:center !important;max-width:none;padding:5px 12px !important;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
     .topnav .cap{font-size:8px !important;letter-spacing:.12em !important}
     .footer-bar{gap:7px !important;bottom:18px !important;left:20px !important;right:20px !important}
     .footer-bar span,.footer-bar a{font-size:8px !important;letter-spacing:.08em !important}
@@ -886,19 +893,8 @@ class Component extends DCLogic {
         project,
       };
     }
-    if (raw.includes('/')) {
-      const parts = raw.split('/').map((x) => x.trim().toLowerCase()).filter(Boolean);
-      const folders = parts.slice(0, -1); // last part is always the image file
-      if (folders.length) {
-        const [category, location, project] = folders;
-        return {
-          category: this.normalizeCategory((category || '').replace(/-?photography$/, '') || category),
-          location: location || '',
-          project: project || '',
-        };
-      }
-    }
-    const base = raw.replace(/\.[^.]+$/, '').trim().toLowerCase();
+    // Always parse the file's own name — never the folders it sits in.
+    const base = dd;
     if (base.includes('_')) {
       const f = base.split('_').map((x) => x.trim()).filter(Boolean);
       let category = (f[0] || '').replace(/-?photography$/, '') || f[0];
