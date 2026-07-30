@@ -22,16 +22,15 @@
   .ph span{font:10px/1.4 ui-monospace,Menlo,monospace;color:#8a8578;letter-spacing:.03em;text-align:center;padding:0 10px;text-transform:uppercase;pointer-events:none}
   .navlink{cursor:pointer}
   .navlink:hover{opacity:.55}
-  .home-brand,.menu-logo{padding:8px 14px;background:rgba(253,252,250,.82);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border-radius:3px}
+  .home-brand,.topnav{padding:8px 14px;background:rgba(253,252,250,.82);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border-radius:3px}
   @media (max-width:640px){
-    .home-brand{gap:5px !important;margin-left:-14px !important}
+    .home-brand{gap:5px !important;top:16px !important}
     .home-brand>span{gap:1px !important}
     .home-brand .cap:first-child{font-size:10px !important}
     .home-brand .cap:last-child{font-size:7px !important}
     .home-brand svg{width:13px !important;height:13px !important}
-    .menu-logo{top:16px !important;gap:2px !important}
-    .menu-logo span{font-size:8px !important}
-    .menu-logo img{width:32px !important}
+    .topnav{top:14px !important;right:14px !important;gap:9px !important;flex-wrap:wrap;justify-content:flex-end;max-width:64vw;padding:6px 10px !important}
+    .topnav .cap{font-size:8px !important;letter-spacing:.12em !important}
     .footer-bar{gap:7px !important;bottom:18px !important;left:20px !important;right:20px !important}
     .footer-bar span,.footer-bar a{font-size:8px !important;letter-spacing:.08em !important}
     .cat2-wrap{flex-direction:column !important;height:auto !important;min-height:100vh;gap:22px !important;padding:92px 18px 130px !important}
@@ -64,6 +63,13 @@
 </helmet>
 <div style="position:relative;width:100%;min-height:100vh;background:#fdfcfa;color:#111">
 
+  <!-- ============ TOP-RIGHT NAV (always visible) ============ -->
+  <div class="topnav" style="position:fixed;top:24px;right:26px;z-index:45;display:flex;flex-direction:row;align-items:center;gap:16px">
+    <sc-for list="{{ catList2 }}" as="c" hint-placeholder-count="3">
+      <div class="cap navlink" style="font-size:10px;font-weight:500;letter-spacing:.18em;color:#111;white-space:nowrap" onClick="{{ c.open }}">{{ c.label }}</div>
+    </sc-for>
+  </div>
+
   <!-- ============ TOP CHROME (home only) ============ -->
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     
@@ -72,11 +78,7 @@
   <!-- ============ SINGLE IMAGE VIEW ============ -->
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     <div style="position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 28px 32px; z-index: 40; pointer-events: none">
-      <div class="navlink home-brand" style="pointer-events:auto;display:flex;flex-direction:row;align-items:center;gap:8px" onClick="{{ goHome }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#111"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></svg><span style="display:flex;flex-direction:column;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
-      <div class="navlink menu-logo" style="pointer-events:auto;position:absolute;left:50%;transform:translateX(-50%);top:20px;display:flex;flex-direction:column;align-items:center;gap:4px" onClick="{{ openMenu }}">
-        <span class="cap" style="font-size:10px;font-weight:500;letter-spacing:.3em;color:#999;margin-right:-.3em">MENU</span>
-        <img src="assets/logo-t.png" alt="Menu" style="width:44px;height:auto">
-      </div>
+      <div class="navlink home-brand" style="pointer-events:auto;position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
       <sc-if value="{{ isSingle }}" hint-placeholder-val="{{ true }}">
         <div style="pointer-events:auto;display:flex;flex-direction:column;align-items:flex-end;gap:14px">
         </div>
@@ -85,7 +87,7 @@
     <sc-if value="{{ isSingle }}" hint-placeholder-val="{{ true }}">
       <div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 90px clamp(16px,5vw,60px) 70px; position: relative">
         <div data-ratio-frame="" style="position:relative;height:min(78vh,880px);aspect-ratio:4/5;max-width:90vw;min-width:0;overflow:hidden;box-shadow:0 30px 80px -30px rgba(0,0,0,.25)">
-          <image-slot id="{{ currentImg.slotId }}" shape="rect" fit="contain" src="{{ currentImg.src }}" placeholder="{{ currentImg.label }}" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
+          <image-slot id="{{ currentImg.slotId }}" shape="rect" fit="contain" src="{{ currentImg.src }}" placeholder="{{ currentImg.label }}" style="position: absolute; inset: 0; width: 100%; height: 100%; top: -29px"></image-slot>
           <div style="position:absolute;top:88px;bottom:0;left:0;width:45%;cursor:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2740%27%20height%3D%2740%27%3E%3Cpath%20d%3D%27M25%208%20L13%2020%20L25%2032%27%20fill%3D%27none%27%20stroke%3D%27%23111%27%20stroke-width%3D%272.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E) 20 20, w-resize;z-index:5" onClick="{{ prevImg }}"></div>
           <div style="position:absolute;top:88px;bottom:0;right:0;width:45%;cursor:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2740%27%20height%3D%2740%27%3E%3Cpath%20d%3D%27M15%208%20L27%2020%20L15%2032%27%20fill%3D%27none%27%20stroke%3D%27%23111%27%20stroke-width%3D%272.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E) 20 20, e-resize;z-index:5" onClick="{{ nextImg }}"></div>
         </div>
@@ -98,28 +100,6 @@
 
   </sc-if>
 
-
-  <!-- ============ FULLSCREEN MENU ============ -->
-  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
-    <div style="position:fixed;inset:0;background:#fdfcfa;z-index:100;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 clamp(24px,8vw,60px);animation:menuOverlayIn .25s ease both">
-      <div style="position:absolute;top:20px;left:50%;margin-left:-22px;width:44px;height:30px;pointer-events:none">
-        <div class="logo-piece" style="left:0;top:0;width:15px;height:15px;background-position:0 0;animation:fallA .55s .05s both"></div>
-        <div class="logo-piece" style="left:15px;top:0;width:15px;height:15px;background-position:-15px 0;animation:fallB .6s 0s both"></div>
-        <div class="logo-piece" style="left:30px;top:0;width:14px;height:15px;background-position:-30px 0;animation:fallC .5s .1s both"></div>
-        <div class="logo-piece" style="left:0;top:15px;width:15px;height:15px;background-position:0 -15px;animation:fallC .5s 0s both"></div>
-        <div class="logo-piece" style="left:15px;top:15px;width:15px;height:15px;background-position:-15px -15px;animation:fallA .6s .12s both"></div>
-        <div class="logo-piece" style="left:30px;top:15px;width:14px;height:15px;background-position:-30px -15px;animation:fallB .55s .07s both"></div>
-      </div>
-      <div class="navlink" style="position:absolute;top:28px;left:32px;display:flex;flex-direction:row;align-items:center;gap:8px;animation:menuMetaIn .3s ease .8s both" onClick="{{ goHome }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#111"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></svg><span style="display:flex;flex-direction:column;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
-      <div class="navlink" style="position:absolute;top:28px;right:32px;font-size:22px;font-weight:300;color:#111;animation:menuMetaIn .3s ease .8s both" onClick="{{ closeMenu }}">✕</div>
-      <div style="position:absolute;top:120px;bottom:110px;left:clamp(24px,8vw,60px);right:clamp(24px,8vw,60px);max-width:640px;display:flex;flex-direction:column;gap:4px;overflow-y:auto">
-        <sc-for list="{{ catList2 }}" as="c" hint-placeholder-count="3">
-          <div class="navlink menu-item" style="display:flex;align-items:center;gap:16px;animation-delay:.5s" onClick="{{ c.open }}"><span style="flex:none;width:14px;height:1px;background:#111"></span><span style="font-family:'Jost',Helvetica,sans-serif;text-transform:uppercase;white-space:nowrap;font-size:clamp(15px,2.6vw,27px);font-weight:200;letter-spacing:.14em;line-height:1.08">{{ c.label }}</span></div>
-        </sc-for>
-        <div class="navlink menu-item" style="display:flex;align-items:center;gap:16px;animation-delay:.62s;margin-top:22px" onClick="{{ gotoIndex }}"><span style="flex:none;width:14px;height:1px;background:#b6b2a6"></span><span style="font-family:'Jost',Helvetica,sans-serif;text-transform:uppercase;white-space:nowrap;font-size:clamp(15px,2.6vw,27px);font-weight:200;letter-spacing:.14em;line-height:1.08;color:#8a867b">LIBRARY</span></div>
-      </div>
-    </div>
-  </sc-if>
 
   <!-- ============ LIBRARY (private uploader — not linked for visitors) ============ -->
   <sc-if value="{{ isIndex }}" hint-placeholder-val="{{ false }}">
@@ -145,8 +125,7 @@
       </div>
       <div class="cap navlink" title="Erase every photo in the library" style="margin-top:44px;font-size:9px;font-weight:500;letter-spacing:.18em;color:#cfcbbf" style-hover="color:#a33;opacity:1" onClick="{{ clearAllGalleries }}">☠ ERASE ALL PHOTOS (KEEPS ABOUT + VIDEO)</div>
     </div>
-    <div class="navlink home-brand" style="position:fixed;top:28px;left:32px;display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#111"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></svg><span style="display:flex;flex-direction:column;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
-    <div class="navlink menu-logo" style="position:fixed;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;z-index:40" onClick="{{ openMenu }}"><span class="cap" style="font-size:10px;font-weight:500;letter-spacing:.3em;color:#999;margin-right:-.3em">MENU</span><img src="assets/logo-t.png" alt="Menu" style="width:44px;height:auto"></div>
+    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
   </sc-if>
 
   <!-- ============ INDEX 2.0 (categories) ============ -->
@@ -187,8 +166,7 @@
       </div>
       <div class="cap navlink" style="position: fixed; top: 78px; left: 39px; font-size: 14px; font-weight: 700; letter-spacing: .15em; z-index: 40; color: #111" onClick="{{ backToCats2 }}">← INDEX</div>
     </sc-if>
-    <div class="navlink home-brand" style="position:fixed;top:28px;left:32px;display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#111"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></svg><span style="display:flex;flex-direction:column;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
-    <div class="navlink menu-logo" style="position:fixed;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;z-index:40" onClick="{{ openMenu }}"><span class="cap" style="font-size:10px;font-weight:500;letter-spacing:.3em;color:#999;margin-right:-.3em">MENU</span><img src="assets/logo-t.png" alt="Menu" style="width:44px;height:auto"></div>
+    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
     <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
       <div style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(253,252,250,.55);backdrop-filter:blur(14px) saturate(0);-webkit-backdrop-filter:blur(14px) saturate(0);animation:menuOverlayIn .25s ease both" onClick="{{ closeLightbox }}">
         {{ lightboxImg }}
@@ -217,9 +195,8 @@
         </sc-for>
       </div>
     </div>
-    <div class="navlink home-brand" style="position:fixed;top:28px;left:32px;display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#111"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></svg><span style="display:flex;flex-direction:column;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
+    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
     <div class="cap navlink" style="position:fixed;top:64px;left:32px;font-size:14px;font-weight:700;letter-spacing:.15em;z-index:40;color:#111" onClick="{{ gotoIndex }}">← INDEX</div>
-    <div class="navlink menu-logo" style="position:fixed;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;z-index:40" onClick="{{ openMenu }}"><span class="cap" style="font-size:10px;font-weight:500;letter-spacing:.3em;color:#999;margin-right:-.3em">MENU</span><img src="assets/logo-t.png" alt="Menu" style="width:44px;height:auto"></div>
     <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
       <div style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(253,252,250,.55);backdrop-filter:blur(14px) saturate(0);-webkit-backdrop-filter:blur(14px) saturate(0);animation:menuOverlayIn .25s ease both" onClick="{{ closeLightbox }}">
         {{ lightboxImg }}
@@ -247,8 +224,7 @@
         </div>
       </div>
     </div>
-    <div class="navlink home-brand" style="position:fixed;top:28px;left:32px;display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#111"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></svg><span style="display:flex;flex-direction:column;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
-    <div class="navlink menu-logo" style="position:fixed;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;z-index:40" onClick="{{ openMenu }}"><span class="cap" style="font-size:10px;font-weight:500;letter-spacing:.3em;color:#999;margin-right:-.3em">MENU</span><img src="assets/logo-t.png" alt="Menu" style="width:44px;height:auto"></div>
+    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
   </sc-if>
 
   <!-- ============ CONTACT PAGE ============ -->
@@ -261,8 +237,7 @@
       <div class="cap" style="font-size:12px;letter-spacing:.12em;color:#999;margin-top:6px">SPACES, OBJECTS AND STORIES</div>
       <a class="cap navlink" href="https://www.instagram.com/sergiolopezfoto/" target="_blank" rel="noopener" style="font-size:12px;letter-spacing:.1em;color:#111;text-decoration:none;margin-top:18px">INSTAGRAM</a>
     </div>
-    <div class="navlink home-brand" style="position:fixed;top:28px;left:32px;display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#111"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></svg><span style="display:flex;flex-direction:column;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
-    <div class="navlink menu-logo" style="position:fixed;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;z-index:40" onClick="{{ openMenu }}"><span class="cap" style="font-size:10px;font-weight:500;letter-spacing:.3em;color:#999;margin-right:-.3em">MENU</span><img src="assets/logo-t.png" alt="Menu" style="width:44px;height:auto"></div>
+    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
   </sc-if>
 
   <!-- ============ VIDEO PAGE ============ -->
@@ -286,8 +261,7 @@
         </sc-for>
       </div>
     </div>
-    <div class="navlink home-brand" style="position:fixed;top:28px;left:32px;display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none;color:#111"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9.5h13V10"></path></svg><span style="display:flex;flex-direction:column;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
-    <div class="navlink menu-logo" style="position:fixed;top:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;z-index:40" onClick="{{ openMenu }}"><span class="cap" style="font-size:10px;font-weight:500;letter-spacing:.3em;color:#999;margin-right:-.3em">MENU</span><img src="assets/logo-t.png" alt="Menu" style="width:44px;height:auto"></div>
+    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
   </sc-if>
 
   <div class="cap footer-bar" style="position:fixed;bottom:18px;left:24px;display:flex;gap:13px;align-items:center;flex-wrap:wrap;justify-content:flex-start;z-index:40;padding:8px 14px;background:rgba(253,252,250,.82);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border-radius:3px">
@@ -969,21 +943,39 @@ class Component extends DCLogic {
   // category_location_project_nn.jpg — so the archive builds itself and the
   // site is fully portable (no browser storage). Adding photos later = drop
   // correctly-named files in images/ and add their names to manifest.json.
+  // The photo library lives in the published repo, not in this file. When the
+  // page is served from anywhere OTHER than the live site (local preview,
+  // design tool), read the manifest and the photos from the live site so the
+  // working copy always shows exactly what visitors see.
+  static LIVE_BASE = 'https://sergiolopjim-cloud.github.io/portfolio/';
+
+  imageBase() {
+    try {
+      const h = location.hostname;
+      if (h === 'sergiolopjim-cloud.github.io' || /sergiolopez/i.test(h)) return './';
+    } catch (e) {}
+    return Component.LIVE_BASE;
+  }
+
   loadManifest() {
-    fetch('./images/manifest.json', { cache: 'no-store' })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((list) => {
-        if (!Array.isArray(list) || !list.length) return;
-        const names = {};
-        const src = {};
-        list.forEach((fn, i) => {
-          const id = 'lib-mf-' + i;
-          names[id] = fn;
-          src[id] = './images/' + fn;
-        });
-        this._manifestSrc = src;
-        this.setState((s) => ({ manifestCount: list.length, fileNames: { ...s.fileNames, ...names } }));
-      })
+    const base = this.imageBase();
+    const apply = (list, b) => {
+      if (!Array.isArray(list) || !list.length) return false;
+      const names = {};
+      const src = {};
+      list.forEach((fn, i) => {
+        const id = 'lib-mf-' + i;
+        names[id] = fn;
+        src[id] = b + 'images/' + fn;
+      });
+      this._manifestSrc = src;
+      this.setState((s) => ({ manifestCount: list.length, fileNames: { ...s.fileNames, ...names } }));
+      return true;
+    };
+    const get = (b) => fetch(b + 'images/manifest.json', { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null)).catch(() => null);
+    get(base)
+      .then((list) => apply(list, base) || (base !== './' ? get('./').then((l) => apply(l, './')) : null))
       .catch(() => {});
   }
 
@@ -1484,10 +1476,15 @@ class Component extends DCLogic {
       cat2Title = bucket.rawCat.replace(/-/g, ' ').toUpperCase();
       cat2AllStyle = chipStyle(!f.location && !f.project);
       const listItemStyle = (on) => `font-family:'Jost',Helvetica,sans-serif;text-transform:uppercase;font-size:11px;letter-spacing:.13em;text-align:right;cursor:pointer;padding:5px 0;line-height:1.3;color:${on ? '#111' : '#9c988c'};font-weight:${on ? 600 : 300}`;
-      cat2Chips = projects.map((v) => ({ label: v.replace(/-/g, ' ').toUpperCase(), style: listItemStyle(f.project === v), onClick: () => this.setFilter2('project', v) }));
+      // A category whose files carry no project field (or just one) has nothing
+      // to pick from — show its photos straight away instead of a blank grid.
+      const flatCat = projects.length <= 1;
+      cat2Chips = flatCat ? [] : projects.map((v) => ({ label: v.replace(/-/g, ' ').toUpperCase(), style: listItemStyle(f.project === v), onClick: () => this.setFilter2('project', v) }));
       const filtered = f.project
         ? bucket.slots.filter((x) => (!f.location || x.location === f.location) && x.project === f.project)
-        : [];
+        : flatCat
+          ? bucket.slots.filter((x) => !f.location || x.location === f.location)
+          : [];
       const cat2SlotIds = filtered.map((x) => x.slotId);
       cat2Cells = filtered.map((x, i) => ({
         slotId: x.slotId,
