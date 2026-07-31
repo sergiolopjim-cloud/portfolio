@@ -22,14 +22,16 @@
   .ph{position:relative;background:repeating-linear-gradient(135deg,var(--c1,#dcdad3),var(--c1,#dcdad3) 10px,var(--c2,#e8e6df) 10px,var(--c2,#e8e6df) 20px);display:flex;align-items:center;justify-content:center;overflow:hidden;width:100%;height:100%}
   .ph span{font:10px/1.4 ui-monospace,Menlo,monospace;color:#8a8578;letter-spacing:.03em;text-align:center;padding:0 10px;text-transform:uppercase;pointer-events:none}
   .navlink{cursor:pointer}
+  .topnav .navlink+.navlink{border-left:1px solid rgba(17,17,17,.22);padding-left:15px}
   .navlink:hover{opacity:.55}
   .home-brand,.topnav{padding:8px 14px;background:rgba(253,252,250,.82);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border-radius:3px}
   /* Tablet / small laptop: let the category nav wrap and shrink so it never
      runs into the centred wordmark. */
   @media (max-width:1000px){
-    .topnav{gap:10px !important;flex-wrap:wrap;justify-content:flex-end;max-width:30vw;padding:6px 10px !important}
-    .leftnav{gap:10px !important;flex-wrap:wrap;max-width:30vw;padding:6px 10px !important}
-    .topnav .cap,.leftnav .cap{font-size:9px !important;letter-spacing:.1em !important}
+    .topnav{gap:10px !important;flex-wrap:wrap;justify-content:flex-end;max-width:34vw;padding:6px 10px !important}
+    .leftnav{gap:10px !important;flex-wrap:wrap;max-width:26vw;padding:6px 10px !important}
+    .topnav .navlink,.leftnav .cap{font-size:9px !important;letter-spacing:.1em !important}
+    .topnav .navlink+.navlink{padding-left:10px}
   }
   @media (max-width:640px){
     .home-brand{gap:5px !important;top:16px !important}
@@ -38,12 +40,13 @@
     .home-brand .cap:last-child{font-size:7px !important}
     .home-brand svg{width:13px !important;height:13px !important}
     /* Phones: the nav moves onto its own centred line under the wordmark. */
-    .leftnav{top:52px !important;left:0 !important;right:0 !important;gap:12px !important;flex-wrap:wrap;justify-content:center !important;padding:4px 12px !important;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
-    .leftnav .cap{font-size:8px !important;letter-spacing:.12em !important}
+    .leftnav{top:50px !important;left:0 !important;right:0 !important;gap:14px !important;flex-wrap:nowrap !important;justify-content:center !important;max-width:none !important;padding:4px 10px !important;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+    .leftnav .cap{font-size:8px !important;letter-spacing:.1em !important}
     .leftnav .ig-link svg{width:11px !important;height:11px !important}
     .index-back{top:20px !important;left:14px !important;font-size:8px !important}
-    .topnav{top:76px !important;left:0 !important;right:0 !important;gap:12px !important;flex-wrap:wrap;justify-content:center !important;max-width:none;padding:5px 12px !important;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
-    .topnav .cap{font-size:8px !important;letter-spacing:.12em !important}
+    .topnav{top:72px !important;left:0 !important;right:0 !important;gap:9px !important;flex-wrap:nowrap !important;justify-content:center !important;max-width:none;padding:5px 8px !important;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+    .topnav .navlink{font-size:8px !important;letter-spacing:.06em !important}
+    .topnav .navlink+.navlink{padding-left:9px}
     .footer-bar{gap:7px !important;bottom:18px !important;left:20px !important;right:20px !important}
     .footer-bar span,.footer-bar a{font-size:8px !important;letter-spacing:.08em !important}
     .cat2-wrap{flex-direction:column !important;height:auto !important;min-height:100vh;gap:14px !important;padding:112px 18px 130px !important}
@@ -110,7 +113,7 @@
     <sc-if value="{{ isSingle }}" hint-placeholder-val="{{ true }}">
       <div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 90px clamp(16px,5vw,60px) 70px; position: relative">
         <div data-ratio-frame="" style="position:relative;height:min(78vh,880px);aspect-ratio:4/5;max-width:90vw;min-width:0;overflow:hidden;box-shadow:0 30px 80px -30px rgba(0,0,0,.25)">
-          <image-slot id="{{ currentImg.slotId }}" shape="rect" fit="contain" src="{{ currentImg.src }}" placeholder="{{ currentImg.label }}" style="position: absolute; inset: 0; width: 100%; height: 100%; top: -29px"></image-slot>
+          <image-slot id="{{ currentImg.slotId }}" shape="rect" fit="contain" src="{{ currentImg.src }}" placeholder="{{ currentImg.label }}" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
           <div style="position:absolute;top:88px;bottom:0;left:0;width:45%;cursor:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2740%27%20height%3D%2740%27%3E%3Cpath%20d%3D%27M25%208%20L13%2020%20L25%2032%27%20fill%3D%27none%27%20stroke%3D%27%23111%27%20stroke-width%3D%272.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E) 20 20, w-resize;z-index:5" onClick="{{ prevImg }}"></div>
           <div style="position:absolute;top:88px;bottom:0;right:0;width:45%;cursor:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2740%27%20height%3D%2740%27%3E%3Cpath%20d%3D%27M15%208%20L27%2020%20L15%2032%27%20fill%3D%27none%27%20stroke%3D%27%23111%27%20stroke-width%3D%272.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E) 20 20, e-resize;z-index:5" onClick="{{ nextImg }}"></div>
         </div>
