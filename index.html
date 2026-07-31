@@ -246,7 +246,7 @@
           <p style="font-size:15px;line-height:1.75;color:#3a3a3a;font-weight:300;margin-top:14px">Over the years I’ve had the chance to work with some great people and brands, including Bvlgari, Casa Wabi, COS, Grupo Habita, IHG Hotels &amp; Resorts, IKEA, Kimpton Hotels, Presidente Intercontinental and TAX Alberto Kalach, and my photos have appeared in publications like Dezeen, Wallpaper, Vogue, Monocle, Rizzoli, The Architectural Review and GQ.</p>
           <p style="font-size:15px;line-height:1.75;color:#3a3a3a;font-weight:300;margin-top:14px">My life in photography started out in the countryside, photographing animals and insects, and that curiosity for details, light, and how things fit together has never really left me. I’m a bit of a gear nerd too. I love experimenting with cameras, lighting, and the technical side of photography.</p>
           <p style="font-size:15px;line-height:1.75;color:#3a3a3a;font-weight:300;margin-top:14px">Outside of photography, I enjoy diving into books about mythology, psychology, and science fiction, or sketching to unwind.</p>
-          <p style="font-size:15px;line-height:1.75;color:#3a3a3a;font-weight:300;margin-top:14px">If you’d like to collaborate or just say hi, you can reach me at <a href="mailto:hola@sergiolopez.mx" style="color:#111">hola@sergiolopez.mx</a>. I’d be happy to hear from you.</p>
+          <p style="font-size:15px;line-height:1.75;color:#3a3a3a;font-weight:300;margin-top:14px">If you’d like to collaborate or just say hi, you can reach me at <a href="mailto:hola@sergiolopezfoto.com" style="color:#111">hola@sergiolopezfoto.com</a>. I’d be happy to hear from you.</p>
         </div>
       </div>
     </div>
@@ -258,7 +258,7 @@
     <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:0 40px;text-align:center">
       <div class="cap" style="font-size:14px;font-weight:700;letter-spacing:.14em">CONTACT</div>
       <p style="font-size:15px;line-height:1.7;color:#3a3a3a;font-weight:300;max-width:440px;margin:0">I'm available for local and international projects as well as potential employment opportunities.</p>
-      <a href="mailto:hola@sergiolopez.mx" class="cap" style="font-size:17px;letter-spacing:.05em;color:#111;text-decoration:none;border-bottom:1px solid #111;padding-bottom:2px">HOLA@SERGIOLOPEZ.MX</a>
+      <a href="mailto:hola@sergiolopezfoto.com" class="cap" style="font-size:17px;letter-spacing:.05em;color:#111;text-decoration:none;border-bottom:1px solid #111;padding-bottom:2px">HOLA@SERGIOLOPEZFOTO.COM</a>
       <a href="mailto:sergio.lopjim@gmail.com" class="cap" style="font-size:13px;letter-spacing:.05em;color:#666;text-decoration:none">SERGIO.LOPJIM@GMAIL.COM</a>
       <div class="cap" style="font-size:12px;letter-spacing:.12em;color:#999;margin-top:6px">SPACES, OBJECTS AND STORIES</div>
       <a class="cap navlink" href="https://www.instagram.com/sergiolopezfoto/" target="_blank" rel="noopener" style="font-size:12px;letter-spacing:.1em;color:#111;text-decoration:none;margin-top:18px">INSTAGRAM</a>
@@ -674,6 +674,10 @@ class Component extends DCLogic {
     // 2-arch / 1-product order, when the current index isn't part of it.
     if (this.state.page === 'home' && this.state.mode === 'single') {
       const order = this._slideOrder || [];
+      if (order.length && this._explicitOrder && !this._snappedFirst) {
+        this._snappedFirst = true;
+        if (this.state.index !== order[0]) { this.setState({ index: order[0] }); return; }
+      }
       if (order.length && order.indexOf(this.state.index) < 0) {
         this.setState({ index: order[0] });
         return;
@@ -727,6 +731,22 @@ class Component extends DCLogic {
       else if (c === 'product') buckets.product.push(img.id);
       else buckets.other.push(img.id);
     });
+    // ---- Explicit order: a number at the front of the filename ----
+    // Any slideshow photo named 01-…, 02-… runs in that exact order, ahead of
+    // everything else. Unnumbered photos keep the 2-2-1 category rhythm below.
+    const numOf = (img) => {
+      const n = String(names[img.slotId] || '').split('/').pop();
+      const m = /^(\d{1,3})[-_. ]/.exec(n);
+      return m ? parseInt(m[1], 10) : null;
+    };
+    const numbered = src.filter((img) => numOf(img) !== null)
+      .sort((x, y) => numOf(x) - numOf(y) || String(names[x.slotId]).localeCompare(String(names[y.slotId])))
+      .map((img) => img.id);
+    if (numbered.length) {
+      const taken = new Set(numbered);
+      Object.keys(buckets).forEach((k) => { buckets[k] = buckets[k].filter((id) => !taken.has(id)); });
+    }
+    this._explicitOrder = numbered.length > 0;
     const shuffle = (arr, seed) => {
       let s = seed;
       for (let i = arr.length - 1; i > 0; i--) {
@@ -740,7 +760,7 @@ class Component extends DCLogic {
     shuffle(buckets.arch, 67890);
     shuffle(buckets.product, 24680);
     shuffle(buckets.other, 13579);
-    const seq = [];
+    const seq = numbered.slice();
     const take = (b, n) => { for (let k = 0; k < n && b.length; k++) seq.push(b.shift()); };
     while (buckets.hotel.length || buckets.arch.length || buckets.product.length) {
       take(buckets.hotel, 2);
@@ -999,10 +1019,12 @@ class Component extends DCLogic {
       this.setState((s) => ({ manifestCount: list.length, fileNames: { ...s.fileNames, ...names } }));
       return true;
     };
-    const get = (b) => fetch(b + 'images/manifest.json', { cache: 'no-store' })
+    const get = (u) => fetch(u, { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : null)).catch(() => null);
-    get(base)
-      .then((list) => apply(list, base) || (base !== './' ? get('./').then((l) => apply(l, './')) : null))
+    // Photos always come from `base`; only the index is read locally first,
+    // because some preview sandboxes block cross-origin fetch (images are fine).
+    get('./images/manifest.json')
+      .then((list) => apply(list, base) || get(base + 'images/manifest.json').then((l) => apply(l, base)))
       .catch(() => {});
   }
 
