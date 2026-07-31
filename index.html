@@ -27,8 +27,9 @@
   /* Tablet / small laptop: let the category nav wrap and shrink so it never
      runs into the centred wordmark. */
   @media (max-width:1000px){
-    .topnav{gap:10px !important;flex-wrap:wrap;justify-content:flex-end;max-width:34vw;padding:6px 10px !important}
-    .topnav .cap{font-size:9px !important;letter-spacing:.1em !important}
+    .topnav{gap:10px !important;flex-wrap:wrap;justify-content:flex-end;max-width:30vw;padding:6px 10px !important}
+    .leftnav{gap:10px !important;flex-wrap:wrap;max-width:30vw;padding:6px 10px !important}
+    .topnav .cap,.leftnav .cap{font-size:9px !important;letter-spacing:.1em !important}
   }
   @media (max-width:640px){
     .home-brand{gap:5px !important;top:16px !important}
@@ -37,12 +38,15 @@
     .home-brand .cap:last-child{font-size:7px !important}
     .home-brand svg{width:13px !important;height:13px !important}
     /* Phones: the nav moves onto its own centred line under the wordmark. */
+    .leftnav{top:52px !important;left:0 !important;right:0 !important;gap:12px !important;flex-wrap:wrap;justify-content:center !important;padding:4px 12px !important;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+    .leftnav .cap{font-size:8px !important;letter-spacing:.12em !important}
+    .leftnav .ig-link svg{width:11px !important;height:11px !important}
     .index-back{top:20px !important;left:14px !important;font-size:8px !important}
-    .topnav{top:58px !important;left:0 !important;right:0 !important;gap:12px !important;flex-wrap:wrap;justify-content:center !important;max-width:none;padding:5px 12px !important;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+    .topnav{top:76px !important;left:0 !important;right:0 !important;gap:12px !important;flex-wrap:wrap;justify-content:center !important;max-width:none;padding:5px 12px !important;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
     .topnav .cap{font-size:8px !important;letter-spacing:.12em !important}
     .footer-bar{gap:7px !important;bottom:18px !important;left:20px !important;right:20px !important}
     .footer-bar span,.footer-bar a{font-size:8px !important;letter-spacing:.08em !important}
-    .cat2-wrap{flex-direction:column !important;height:auto !important;min-height:100vh;gap:14px !important;padding:88px 18px 130px !important}
+    .cat2-wrap{flex-direction:column !important;height:auto !important;min-height:100vh;gap:14px !important;padding:112px 18px 130px !important}
     .cat2-wrap>div:first-child{height:auto !important}
     /* Phones: projects read as a plain vertical list — one tappable row each. */
     .cat2-side{width:100% !important;order:-1;height:auto !important;overflow:visible !important;flex-direction:column !important;gap:0 !important;border-top:1px solid rgba(17,17,17,.1)}
@@ -72,6 +76,15 @@
 </style>
 </helmet>
 <div style="position:relative;width:100%;min-height:100vh;background:#fdfcfa;color:#111">
+
+
+  <!-- ============ TOP-LEFT NAV (always visible) ============ -->
+  <div class="leftnav" style="position:fixed;top:24px;left:26px;z-index:45;display:flex;flex-direction:row;align-items:center;gap:16px;padding:8px 14px;background:rgba(253,252,250,.82);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border-radius:3px">
+    <div class="cap navlink" style="font-size:10px;font-weight:500;letter-spacing:.18em;color:#111;white-space:nowrap;cursor:pointer" onClick="{{ gotoVideo }}">VIDEO</div>
+    <div class="cap navlink" style="font-size:10px;font-weight:500;letter-spacing:.18em;color:#111;white-space:nowrap;cursor:pointer" onClick="{{ gotoAbout }}">ABOUT</div>
+    <div class="cap navlink" style="font-size:10px;font-weight:500;letter-spacing:.18em;color:#111;white-space:nowrap;cursor:pointer" onClick="{{ gotoContact }}">CONTACT</div>
+    <a class="navlink ig-link" href="https://www.instagram.com/sergiolopezfoto/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram" style="display:flex;align-items:center;color:#111;text-decoration:none"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="display:block"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"></circle></svg></a>
+  </div>
 
   <!-- ============ TOP-RIGHT NAV (always visible) ============ -->
   <div class="topnav" style="position:fixed;top:24px;right:26px;z-index:45;display:flex;flex-direction:row;align-items:center;gap:16px">
@@ -174,7 +187,7 @@
           </sc-for>
         </div>
       </div>
-      <div class="cap navlink index-back" style="position:fixed;top:26px;left:20px;font-size:9px;font-weight:500;letter-spacing:.16em;z-index:46;color:#111" onClick="{{ backToCats2 }}">← INDEX</div>
+      <div class="cap navlink index-back" style="position:fixed;top:56px;left:32px;font-size:9px;font-weight:500;letter-spacing:.16em;z-index:46;color:#111" onClick="{{ backToCats2 }}">← INDEX</div>
     </sc-if>
     <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
     <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
@@ -206,7 +219,7 @@
       </div>
     </div>
     <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
-    <div class="cap navlink index-back" style="position:fixed;top:26px;left:20px;font-size:9px;font-weight:500;letter-spacing:.16em;z-index:46;color:#111" onClick="{{ gotoIndex }}">← INDEX</div>
+    <div class="cap navlink index-back" style="position:fixed;top:56px;left:32px;font-size:9px;font-weight:500;letter-spacing:.16em;z-index:46;color:#111" onClick="{{ gotoIndex }}">← INDEX</div>
     <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
       <div style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(253,252,250,.55);backdrop-filter:blur(14px) saturate(0);-webkit-backdrop-filter:blur(14px) saturate(0);animation:menuOverlayIn .25s ease both" onClick="{{ closeLightbox }}">
         {{ lightboxImg }}
@@ -277,14 +290,6 @@
   <div class="cap footer-bar" style="position:fixed;bottom:18px;left:24px;display:flex;gap:13px;align-items:center;flex-wrap:wrap;justify-content:flex-start;z-index:40;padding:8px 14px;background:rgba(253,252,250,.82);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border-radius:3px">
     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5" style="display:block;flex:none;margin-right:-7px"><circle cx="12" cy="12" r="7"></circle><line x1="12" y1="1" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="23"></line><line x1="1" y1="12" x2="5" y2="12"></line><line x1="19" y1="12" x2="23" y2="12"></line></svg>
     <span style="font-size:10px;font-weight:400;letter-spacing:.15em;color:#999">MALMÖ, SWEDEN</span>
-    <span style="color:#cfcbbf;font-size:9px">·</span>
-    <span class="navlink" style="font-size:10px;font-weight:400;letter-spacing:.15em;color:#111;cursor:pointer" onClick="{{ gotoVideo }}">VIDEO</span>
-    <span style="color:#cfcbbf;font-size:9px">·</span>
-    <span class="navlink" style="font-size:10px;font-weight:400;letter-spacing:.15em;color:#111;cursor:pointer" onClick="{{ gotoAbout }}">ABOUT</span>
-    <span style="color:#cfcbbf;font-size:9px">·</span>
-    <span class="navlink" style="font-size:10px;font-weight:400;letter-spacing:.15em;color:#111;cursor:pointer" onClick="{{ gotoContact }}">CONTACT</span>
-    <span style="color:#cfcbbf;font-size:9px">·</span>
-    <a class="navlink" href="https://www.instagram.com/sergiolopezfoto/" target="_blank" rel="noopener" style="font-size:10px;font-weight:400;letter-spacing:.15em;color:#111;text-decoration:none">INSTAGRAM</a>
   </div>
 
 </div>
