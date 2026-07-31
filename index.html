@@ -36,14 +36,16 @@
     .home-brand .cap:last-child{font-size:7px !important}
     .home-brand svg{width:13px !important;height:13px !important}
     /* Phones: the nav moves onto its own centred line under the wordmark. */
+    .index-back{top:20px !important;left:14px !important;font-size:8px !important}
     .topnav{top:58px !important;left:0 !important;right:0 !important;gap:12px !important;flex-wrap:wrap;justify-content:center !important;max-width:none;padding:5px 12px !important;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
     .topnav .cap{font-size:8px !important;letter-spacing:.12em !important}
     .footer-bar{gap:7px !important;bottom:18px !important;left:20px !important;right:20px !important}
     .footer-bar span,.footer-bar a{font-size:8px !important;letter-spacing:.08em !important}
-    .cat2-wrap{flex-direction:column !important;height:auto !important;min-height:100vh;gap:22px !important;padding:92px 18px 130px !important}
+    .cat2-wrap{flex-direction:column !important;height:auto !important;min-height:100vh;gap:14px !important;padding:88px 18px 130px !important}
     .cat2-wrap>div:first-child{height:auto !important}
-    .cat2-side{width:100% !important;order:-1;height:auto !important;overflow:visible !important;flex-direction:row !important;flex-wrap:wrap !important;justify-content:center !important;gap:8px 18px !important}
-    .cat2-side .navlink{text-align:center !important}
+    /* Phones: projects read as a plain vertical list — one tappable row each. */
+    .cat2-side{width:100% !important;order:-1;height:auto !important;overflow:visible !important;flex-direction:column !important;gap:0 !important;border-top:1px solid rgba(17,17,17,.1)}
+    .cat2-side .navlink{display:flex !important;align-items:center !important;min-height:32px !important;padding:6px 2px !important;text-align:left !important;border-bottom:1px solid rgba(17,17,17,.1);font-size:11px !important;letter-spacing:.13em !important;line-height:1.25 !important}
     .cat2-grid{grid-template-columns:repeat(2,1fr) !important;overflow:visible !important;height:auto !important}
   }
   @keyframes menuOverlayIn{from{opacity:0}to{opacity:1}}
@@ -73,7 +75,7 @@
   <!-- ============ TOP-RIGHT NAV (always visible) ============ -->
   <div class="topnav" style="position:fixed;top:24px;right:26px;z-index:45;display:flex;flex-direction:row;align-items:center;gap:16px">
     <sc-for list="{{ catList2 }}" as="c" hint-placeholder-count="3">
-      <div class="cap navlink" style="font-size:10px;font-weight:500;letter-spacing:.18em;color:#111;white-space:nowrap" onClick="{{ c.open }}">{{ c.label }}</div>
+      <div class="navlink" style="{{ c.navStyle }}" onClick="{{ c.open }}">{{ c.label }}</div>
     </sc-for>
   </div>
 
@@ -156,7 +158,7 @@
       <div class="cat2-wrap" style="height:100vh;padding:104px 32px 36px;display:flex;gap:48px;align-items:stretch;max-width:1600px;margin:0 auto;box-sizing:border-box">
         <div style="flex:1;min-width:0;height:100%;display:flex;flex-direction:column">
           <div class="cap" style="flex: none; font-family: 'Jost',Helvetica,sans-serif; text-transform: uppercase; font-size: clamp(15px,2.6vw,27px); font-weight: 200; letter-spacing: .14em; color: #111; margin-bottom: 32px; text-align: center">{{ cat2Title }}</div>
-          <div class="cat2-grid" style="flex:1;min-height:0;overflow-y:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));grid-auto-rows:min-content;gap:14px;align-content:start">
+          <div class="cat2-grid" ref="{{ cat2GridRef }}" style="flex:1;min-height:0;overflow-y:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));grid-auto-rows:min-content;gap:14px;align-content:start">
             <sc-for list="{{ cat2Cells }}" as="img" hint-placeholder-count="0">
               <div class="wall-cell cellw" style="position:relative;min-width:0;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;cursor:pointer;animation-delay:{{ img.wallDelay }}" onClick="{{ img.view }}">
                 <image-slot id="{{ img.slotId }}" shape="rect" fit="contain" src="{{ img.src }}" placeholder="{{ img.label }}" style="width:100%;height:100%"></image-slot>
@@ -171,7 +173,7 @@
           </sc-for>
         </div>
       </div>
-      <div class="cap navlink" style="position: fixed; top: 78px; left: 39px; font-size: 14px; font-weight: 700; letter-spacing: .15em; z-index: 40; color: #111" onClick="{{ backToCats2 }}">← INDEX</div>
+      <div class="cap navlink index-back" style="position:fixed;top:26px;left:20px;font-size:9px;font-weight:500;letter-spacing:.16em;z-index:46;color:#111" onClick="{{ backToCats2 }}">← INDEX</div>
     </sc-if>
     <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
     <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
@@ -203,7 +205,7 @@
       </div>
     </div>
     <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
-    <div class="cap navlink" style="position:fixed;top:64px;left:32px;font-size:14px;font-weight:700;letter-spacing:.15em;z-index:40;color:#111" onClick="{{ gotoIndex }}">← INDEX</div>
+    <div class="cap navlink index-back" style="position:fixed;top:26px;left:20px;font-size:9px;font-weight:500;letter-spacing:.16em;z-index:46;color:#111" onClick="{{ gotoIndex }}">← INDEX</div>
     <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
       <div style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(253,252,250,.55);backdrop-filter:blur(14px) saturate(0);-webkit-backdrop-filter:blur(14px) saturate(0);animation:menuOverlayIn .25s ease both" onClick="{{ closeLightbox }}">
         {{ lightboxImg }}
@@ -220,7 +222,7 @@
   <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
     <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:110px 40px 130px">
       <div style="display:flex;gap:clamp(28px,5vw,70px);max-width:1060px;flex-wrap:wrap;align-items:flex-start;justify-content:center">
-        <div data-ratio-frame="" style="width:min(320px,80vw);aspect-ratio:4/5;flex:none;position:relative;overflow:hidden"><image-slot id="about-portrait" shape="rect" placeholder="Portrait — Sergio Lopez" style="position:absolute;inset:0;width:100%;height:100%"></image-slot></div>
+        <div data-ratio-frame="" style="width:min(320px,80vw);aspect-ratio:4/5;flex:none;position:relative;overflow:hidden"><image-slot id="about-portrait" shape="rect" fit="cover" src="{{ portraitSrc }}" placeholder="Portrait — Sergio Lopez" style="position:absolute;inset:0;width:100%;height:100%"></image-slot></div>
         <div style="max-width:480px">
           <div class="cap" style="font-size:14px;font-weight:700;letter-spacing:.14em;margin-bottom:22px">ABOUT ME</div>
           <p style="font-size:15px;line-height:1.75;color:#3a3a3a;font-weight:300">Hi, I’m Sergio, thanks for stopping by. I’m a photographer who’s been working with a camera for over 15 years, and I love capturing spaces, objects, and artwork in a way that feels clean and elegant. What I’m drawn to most are the lines, shapes, and shadows that give each subject its own character.</p>
@@ -846,11 +848,32 @@ class Component extends DCLogic {
   gotoIndex2 = () => this.setState({ page: 'index2', cat2: null, filter2: {}, menuOpen: false, lightboxSrc: null });
   openCat2 = (key) => this.setState({ cat2: key, filter2: {} });
   backToCats2 = () => this.setState({ cat2: null, filter2: {} });
-  setFilter2 = (type, val) => this.setState((s) => {
-    const f = { ...s.filter2 };
-    if (f[type] === val) delete f[type]; else f[type] = val;
-    return { filter2: f };
-  });
+  cat2GridRef = React.createRef();
+
+  // On phones the project list stacks ABOVE the photos, so picking a project
+  // would otherwise leave the reader looking at the list with the images off
+  // screen. Bring the grid up to just under the header instead.
+  scrollToPhotos() {
+    const el = this.cat2GridRef.current;
+    if (!el || typeof window === 'undefined') return;
+    // Desktop keeps a fixed 100vh two-pane layout whose grid scrolls internally,
+    // so the page must NOT move — just send that pane back to its top.
+    if (!window.matchMedia('(max-width:640px)').matches) { el.scrollTop = 0; return; }
+    const y = el.getBoundingClientRect().top + window.pageYOffset - 74;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }
+
+  setFilter2 = (type, val) => {
+    this.setState((s) => {
+      const f = { ...s.filter2 };
+      if (f[type] === val) delete f[type]; else f[type] = val;
+      return { filter2: f };
+    }, () => {
+      if (type === 'project' && this.state.filter2.project) {
+        requestAnimationFrame(() => this.scrollToPhotos());
+      }
+    });
+  };
 
   // Known shooting locations (longest-prefix wins; add new ones here freely).
   static LOCATIONS = [
@@ -1429,6 +1452,9 @@ class Component extends DCLogic {
       raw: k,
       label: catalog[k].rawCat.replace(/-/g, ' ').toUpperCase(),
       countLabel: String(catalog[k].slots.length).padStart(2, '0'),
+      // Bold + italic marks the category you're currently inside.
+      navStyle: 'font-family:\'Jost\',Helvetica,sans-serif;text-transform:uppercase;font-size:10px;letter-spacing:.18em;white-space:nowrap;cursor:pointer;color:#111;'
+        + (s.cat2 === k && s.page === 'index2' ? 'font-weight:700;font-style:italic' : 'font-weight:500'),
       open: () => this.setState({ page: 'index2', cat2: k, filter2: {}, menuOpen: false }),
     }));
     // Primary menu nav — always present so the overlay is never blank, even
@@ -1536,11 +1562,14 @@ class Component extends DCLogic {
       cat2Landing: s.page === 'index2' && !cat2Selected,
       cat2Selected,
       cat2Empty: catKeys.length === 0,
+      // Lives in the repo at assets/portrait.jpg so every visitor sees it.
+      portraitSrc: this.imageBase() + 'assets/portrait.jpg',
       catList2,
       menuNav,
       menuGalleries,
       menuSecondary,
       cat2Title,
+      cat2GridRef: this.cat2GridRef,
       cat2Chips,
       cat2Cells,
       cat2AllStyle,
