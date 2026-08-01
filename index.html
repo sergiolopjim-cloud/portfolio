@@ -1056,16 +1056,12 @@ class Component extends DCLogic {
       const m = this.parseFileName(names[k]);
       if (m) claimed.add(pairKey(m));
     });
-    // A photo copied into images/slideshow/ is the SAME photo as the one in the
-    // galleries — count it once, from its gallery copy.
-    const seenFile = new Set();
+    // images/slideshow/ is landing-page presentation only — its filenames are
+    // ordering prefixes (01-…, 02-…), not category names. Never build the
+    // archive from it.
     keys.forEach((slotId) => {
       const p = (this._manifestSrc || {})[slotId] || '';
-      if (p && !/(^|\/)slideshow\//.test(p)) seenFile.add(p.split('/').pop().toLowerCase());
-    });
-    keys.forEach((slotId) => {
-      const p = (this._manifestSrc || {})[slotId] || '';
-      if (/(^|\/)slideshow\//.test(p) && seenFile.has(p.split('/').pop().toLowerCase())) return;
+      if (/(^|\/)slideshow\//.test(p)) return;
       // Library uploads and published files (both lib-) build the
       // galleries; wall + preview slots are presentation, not source.
       if (!slotId.startsWith('lib-') && !slotId.startsWith('proj-')) return;
