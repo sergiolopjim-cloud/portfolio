@@ -11,8 +11,44 @@
 <body>
 <x-dc>
 <helmet data-dc-atomics="">
-<title>Sergio Lopez — Architecture &amp; Product Photography, Malmö</title>
-<meta name="description" content="Sergio Lopez is an architecture, interiors and product photographer based in Malmö, Sweden, working across Europe and North America.">
+<title>Sergio López — Hotel &amp; Architecture Photographer, Malmö</title>
+<meta name="description" content="Sergio López is a hotel and architecture photographer based in Malmö, Sweden, photographing hotels, interiors and buildings across Europe and North America.">
+<link rel="canonical" href="https://sergiolopezfoto.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sergio López">
+<meta property="og:title" content="Sergio López — Hotel &amp; Architecture Photographer, Malmö">
+<meta property="og:description" content="Hotel, architecture and interiors photography. Based in Malmö, Sweden, working across Europe and North America.">
+<meta property="og:url" content="https://sergiolopezfoto.com/">
+<meta property="og:image" content="https://sergiolopezfoto.com/assets/og-cover.jpg">
+<meta property="og:image:alt" content="Hotel interior photographed by Sergio López">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sergio López — Hotel &amp; Architecture Photographer, Malmö">
+<meta name="twitter:description" content="Hotel, architecture and interiors photography. Based in Malmö, Sweden.">
+<meta name="twitter:image" content="https://sergiolopezfoto.com/assets/og-cover.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Sergio López",
+  "alternateName": "Sergio Lopez",
+  "url": "https://sergiolopezfoto.com/",
+  "image": "https://sergiolopezfoto.com/assets/og-cover.jpg",
+  "jobTitle": "Hotel and Architecture Photographer",
+  "email": "mailto:hola@sergiolopezfoto.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Malmö", "addressCountry": "SE" },
+  "knowsAbout": ["Hotel photography", "Architecture photography", "Interior photography"],
+  "sameAs": ["https://www.instagram.com/sergiolopezfoto/"],
+  "worksFor": {
+    "@type": "ProfessionalService",
+    "name": "Sergio López Photography",
+    "description": "Hotel, architecture and interiors photography.",
+    "url": "https://sergiolopezfoto.com/",
+    "areaServed": ["Europe", "North America"],
+    "address": { "@type": "PostalAddress", "addressLocality": "Malmö", "addressCountry": "SE" }
+  }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <script src="image-slot.js?v=20260731"></script>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Jost:wght@200;300;400;500&amp;display=swap" rel="stylesheet">
@@ -106,7 +142,7 @@
   <!-- ============ SINGLE IMAGE VIEW ============ -->
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     <div style="position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 28px 32px; z-index: 40; pointer-events: none">
-      <div class="navlink home-brand" style="pointer-events:auto;position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
+      <div class="navlink home-brand" style="pointer-events:auto;position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LÓPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
       <sc-if value="{{ isSingle }}" hint-placeholder-val="{{ true }}">
         <div style="pointer-events:auto;display:flex;flex-direction:column;align-items:flex-end;gap:14px">
         </div>
@@ -153,7 +189,7 @@
       </div>
       <div class="cap navlink" title="Erase every photo in the library" style="margin-top:44px;font-size:9px;font-weight:500;letter-spacing:.18em;color:#cfcbbf" style-hover="color:#a33;opacity:1" onClick="{{ clearAllGalleries }}">☠ ERASE ALL PHOTOS (KEEPS ABOUT + VIDEO)</div>
     </div>
-    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
+    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LÓPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
   </sc-if>
 
   <!-- ============ INDEX 2.0 (categories) ============ -->
@@ -194,7 +230,7 @@
       </div>
       <div class="cap navlink index-back" style="position:fixed;top:56px;left:32px;font-size:9px;font-weight:500;letter-spacing:.16em;z-index:46;color:#111" onClick="{{ backToCats2 }}">← INDEX</div>
     </sc-if>
-    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
+    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LÓPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
     <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
       <div style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(253,252,250,.55);backdrop-filter:blur(14px) saturate(0);-webkit-backdrop-filter:blur(14px) saturate(0);animation:menuOverlayIn .25s ease both" onClick="{{ closeLightbox }}">
         {{ lightboxImg }}
@@ -223,7 +259,7 @@
         </sc-for>
       </div>
     </div>
-    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
+    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LÓPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
     <div class="cap navlink index-back" style="position:fixed;top:56px;left:32px;font-size:9px;font-weight:500;letter-spacing:.16em;z-index:46;color:#111" onClick="{{ gotoIndex }}">← INDEX</div>
     <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
       <div style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(253,252,250,.55);backdrop-filter:blur(14px) saturate(0);-webkit-backdrop-filter:blur(14px) saturate(0);animation:menuOverlayIn .25s ease both" onClick="{{ closeLightbox }}">
@@ -252,7 +288,7 @@
         </div>
       </div>
     </div>
-    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
+    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LÓPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
   </sc-if>
 
   <!-- ============ CONTACT PAGE ============ -->
@@ -265,7 +301,7 @@
       <div class="cap" style="font-size:12px;letter-spacing:.12em;color:#999;margin-top:6px">SPACES, OBJECTS AND STORIES</div>
       <a class="cap navlink" href="https://www.instagram.com/sergiolopezfoto/" target="_blank" rel="noopener" style="font-size:12px;letter-spacing:.1em;color:#111;text-decoration:none;margin-top:18px">INSTAGRAM</a>
     </div>
-    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
+    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LÓPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
   </sc-if>
 
   <!-- ============ VIDEO PAGE ============ -->
@@ -289,7 +325,7 @@
         </sc-for>
       </div>
     </div>
-    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LOPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
+    <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LÓPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
   </sc-if>
 
   <div class="cap footer-bar" style="position:fixed;bottom:18px;left:24px;display:flex;gap:13px;align-items:center;flex-wrap:wrap;justify-content:flex-start;z-index:40;padding:8px 14px;background:rgba(253,252,250,.82);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border-radius:3px">
