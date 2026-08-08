@@ -319,13 +319,22 @@
 
   <!-- ============ CONTACT PAGE ============ -->
   <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
-    <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:0 40px;text-align:center">
-      <div class="cap" style="font-size:14px;font-weight:700;letter-spacing:.14em">CONTACT</div>
-      <p style="font-size:15px;line-height:1.7;color:#3a3a3a;font-weight:300;max-width:440px;margin:0">I'm available for local and international projects as well as potential employment opportunities.</p>
-      <a href="mailto:hola@sergiolopezfoto.com" class="cap" style="font-size:17px;letter-spacing:.05em;color:#111;text-decoration:none;border-bottom:1px solid #111;padding-bottom:2px">HOLA@SERGIOLOPEZFOTO.COM</a>
-      <a href="mailto:sergio.lopjim@gmail.com" class="cap" style="font-size:13px;letter-spacing:.05em;color:#666;text-decoration:none">SERGIO.LOPJIM@GMAIL.COM</a>
-      <div class="cap" style="font-size:12px;letter-spacing:.12em;color:#999;margin-top:6px">SPACES, OBJECTS AND STORIES</div>
-      <a class="cap navlink" href="https://www.instagram.com/sergiolopezfoto/" target="_blank" rel="noopener" style="font-size:12px;letter-spacing:.1em;color:#111;text-decoration:none;margin-top:18px">INSTAGRAM</a>
+    <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:110px 40px 130px">
+      <div style="display:flex;flex-direction:column;gap:44px;max-width:440px;width:100%">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <h1 class="cap" style="font-size:14px;font-weight:700;letter-spacing:.14em;margin:0">CONTACT</h1>
+          <p style="font-size:15px;line-height:1.75;color:#3a3a3a;font-weight:300;margin:0;text-wrap:pretty">I'm available for local and international projects as well as potential employment opportunities.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="cap" style="font-size:10px;font-weight:700;letter-spacing:.16em;color:#999;margin:0">EMAIL</div>
+          <a href="mailto:hola@sergiolopezfoto.com" class="cap" style="font-size:16px;letter-spacing:.04em;color:#111;text-decoration:none;border-bottom:1px solid #111;padding-bottom:3px;align-self:flex-start">HOLA@SERGIOLOPEZFOTO.COM</a>
+          <a href="mailto:sergio.lopjim@gmail.com" class="cap" style="font-size:12px;letter-spacing:.04em;color:#999;text-decoration:none;align-self:flex-start;margin-top:2px">SERGIO.LOPJIM@GMAIL.COM</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="cap" style="font-size:10px;font-weight:700;letter-spacing:.16em;color:#999;margin:0">ELSEWHERE</div>
+          <a class="cap navlink" href="https://www.instagram.com/sergiolopezfoto/" target="_blank" rel="noopener" style="font-size:13px;letter-spacing:.06em;color:#111;text-decoration:none;align-self:flex-start">INSTAGRAM</a>
+        </div>
+      </div>
     </div>
     <div class="navlink home-brand" style="position:fixed;top:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:40" onClick="{{ goHome }}"><span style="display:flex;flex-direction:column;align-items:center;gap:3px"><span class="cap" style="font-size:11px;font-weight:500;letter-spacing:.18em">SERGIO LÓPEZ</span><span class="cap" style="font-size:8px;font-weight:400;letter-spacing:.14em;color:#999">SPACES, OBJECTS AND STORIES</span></span></div>
   </sc-if>
