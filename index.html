@@ -2,6 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>
+  // Pin relative-URL resolution before any other tag is parsed. pushState moves
+  // the document to a deep path (/category/project/), and without a fixed base
+  // every src set afterwards would resolve against that folder and 404.
+  // On the live site the correct base is the root; anywhere else (previews,
+  // project-path hosts) it is the document's own directory.
+  (function () {
+    var live = /(^|\.)sergiolopezfoto\.com$/.test(location.hostname);
+    var b = document.createElement('base');
+    b.href = live ? '/' : location.pathname.replace(/[^/]*$/, '');
+    document.head.appendChild(b);
+  })();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
 <title>Sergio López — Hotel &amp; Architecture Photographer, Malmö</title>
