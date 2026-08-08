@@ -10,7 +10,6 @@ assets/             logo
 images/             ALL PHOTOS — your galleries
 images/slideshow/   the photos on the landing page
 images/manifest.json  maintained automatically — never edit by hand
-CNAME               your custom domain
 .nojekyll           tells GitHub Pages to serve files as-is
 .github/            automation that rebuilds manifest.json after every upload
 ```
@@ -33,9 +32,13 @@ architecture-photography--malmo--villa-nord-01.jpg
 - after the second `--` → the client / project
 - a trailing number (`-01`, `-02`) is ignored, so one client's photos group together
 
+**Folders are free.** Organise inside `images/` however you like — by year, by
+category, nested as deep as you want. Only each file's NAME is read, so your own
+filing system never affects the site.
+
 **Two folders:**
 
-- `images/` — every photo. Builds the categories and project galleries.
+- `images/` — every photo (any subfolders). Builds the categories and project galleries.
 - `images/slideshow/` — copies of the few you want on the landing page.
   Putting a photo in this folder IS the selection. Empty folder = all photos show.
 
@@ -64,7 +67,9 @@ To remove a photo, delete the file and push.
 
 ## Your GoDaddy domain
 
-1. Edit `CNAME`: replace the placeholder with your domain (e.g. `sergiolopez.com`), push.
+1. Create a file named `CNAME` (no extension) in this folder containing only your
+   domain, e.g. `sergiolopez.com` — then commit + push. (Don't add it before the
+   DNS below, or Pages will point at a domain that doesn't resolve yet.)
 2. GoDaddy → your domain → **DNS**:
    - Four `A` records, host `@`:
      `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`

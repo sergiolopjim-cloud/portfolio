@@ -1,16 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
-<!-- Cloudflare Web Analytics -->
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "19ef13304ea748eab4303d167c23c826"}'></script>
-<script src="./support.js?v=20260731"></script>
-</head>
-<body>
-<x-dc>
-<helmet data-dc-atomics="">
 <title>Sergio López — Hotel &amp; Architecture Photographer, Malmö</title>
 <meta name="description" content="Sergio López is a hotel and architecture photographer based in Malmö, Sweden, photographing hotels, interiors and buildings across Europe and North America.">
 <link rel="canonical" href="https://sergiolopezfoto.com/">
@@ -49,8 +42,15 @@
   }
 }
 </script>
+<!-- Cloudflare Web Analytics -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "19ef13304ea748eab4303d167c23c826"}'></script>
+<script src="./support.js?v=20260731"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<script src="image-slot.js?v=20260731"></script>
+<script src="image-slot.js?v=20260807"></script>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Jost:wght@200;300;400;500&amp;display=swap" rel="stylesheet">
 <style>
   html,body{margin:0;padding:0;background:#fdfcfa;font-family:'Jost',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
@@ -151,7 +151,7 @@
     <sc-if value="{{ isSingle }}" hint-placeholder-val="{{ true }}">
       <div style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 90px clamp(16px,5vw,60px) 70px; position: relative">
         <div data-ratio-frame="" style="position:relative;height:min(78vh,880px);aspect-ratio:4/5;max-width:90vw;min-width:0;overflow:hidden;box-shadow:0 30px 80px -30px rgba(0,0,0,.25)">
-          <image-slot id="{{ currentImg.slotId }}" shape="rect" fit="contain" src="{{ currentImg.src }}" placeholder="{{ currentImg.label }}" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
+          <image-slot id="{{ currentImg.slotId }}" shape="rect" fit="contain" src="{{ currentImg.src }}" alt="{{ currentImg.alt }}" placeholder="{{ currentImg.label }}" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
           <div style="position:absolute;top:88px;bottom:0;left:0;width:45%;cursor:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2740%27%20height%3D%2740%27%3E%3Cpath%20d%3D%27M25%208%20L13%2020%20L25%2032%27%20fill%3D%27none%27%20stroke%3D%27%23111%27%20stroke-width%3D%272.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E) 20 20, w-resize;z-index:5" onClick="{{ prevImg }}"></div>
           <div style="position:absolute;top:88px;bottom:0;right:0;width:45%;cursor:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2740%27%20height%3D%2740%27%3E%3Cpath%20d%3D%27M15%208%20L27%2020%20L15%2032%27%20fill%3D%27none%27%20stroke%3D%27%23111%27%20stroke-width%3D%272.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E) 20 20, e-resize;z-index:5" onClick="{{ nextImg }}"></div>
         </div>
@@ -176,7 +176,7 @@
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:4px">
         <sc-for list="{{ libCells }}" as="img" hint-placeholder-count="0">
           <div style="position:relative;aspect-ratio:1;min-width:0">
-            <image-slot id="{{ img.slotId }}" shape="rect" fit="cover" src="{{ img.src }}" placeholder="{{ img.shortLabel }}" style="width:100%;height:100%"></image-slot>
+            <image-slot id="{{ img.slotId }}" shape="rect" fit="cover" src="{{ img.src }}" alt="{{ img.alt }}" placeholder="{{ img.shortLabel }}" style="width:100%;height:100%"></image-slot>
             <sc-if value="{{ img.hasName }}" hint-placeholder-val="{{ false }}">
               <div class="cap" style="position:absolute;left:0;right:0;bottom:0;padding:4px 5px;background:rgba(253,252,250,.9);font-size:7px;font-weight:500;letter-spacing:.1em;color:#111;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ img.fileName }}</div>
             </sc-if>
@@ -216,7 +216,7 @@
           <div class="cat2-grid" ref="{{ cat2GridRef }}" style="flex:1;min-height:0;overflow-y:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));grid-auto-rows:min-content;gap:14px;align-content:start">
             <sc-for list="{{ cat2Cells }}" as="img" hint-placeholder-count="0">
               <div class="wall-cell cellw" style="position:relative;min-width:0;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;cursor:pointer;animation-delay:{{ img.wallDelay }}" onClick="{{ img.view }}">
-                <image-slot id="{{ img.slotId }}" shape="rect" fit="contain" src="{{ img.src }}" placeholder="{{ img.label }}" style="width:100%;height:100%"></image-slot>
+                <image-slot id="{{ img.slotId }}" shape="rect" fit="contain" src="{{ img.src }}" alt="{{ img.alt }}" placeholder="{{ img.label }}" style="width:100%;height:100%"></image-slot>
                 <div style="position:absolute;inset:0;z-index:4;cursor:pointer" onClick="{{ img.view }}"></div>
               </div>
             </sc-for>
@@ -255,7 +255,7 @@
       </div>
       <div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:14px;max-width:1600px;margin:0 auto">
         <sc-for list="{{ activeProject.images }}" as="img" hint-placeholder-count="12">
-          <div class="wall-cell cellw" style="position:relative;min-width:0;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;cursor:pointer;animation-delay:{{ img.wallDelay }};opacity:{{ img.opacity }}" onClick="{{ img.view }}"><image-slot id="{{ img.slotId }}" shape="rect" fit="contain" src="{{ img.src }}" placeholder="{{ img.label }}"></image-slot><div style="position:absolute;inset:0;z-index:4;cursor:pointer" draggable="{{ true }}" onClick="{{ img.view }}" onDragStart="{{ img.dragStart }}" onDragOver="{{ img.dragOver }}" onDrop="{{ img.drop }}" onDragEnd="{{ img.dragEnd }}"></div><sc-if value="{{ img.hasName }}" hint-placeholder-val="{{ false }}"><div class="fname" style="container-type:inline-size;z-index:5"><span style="font-size:{{ img.nameFs }}">{{ img.fileName }}</span></div></sc-if></div>
+          <div class="wall-cell cellw" style="position:relative;min-width:0;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;cursor:pointer;animation-delay:{{ img.wallDelay }};opacity:{{ img.opacity }}" onClick="{{ img.view }}"><image-slot id="{{ img.slotId }}" shape="rect" fit="contain" src="{{ img.src }}" alt="{{ img.alt }}" placeholder="{{ img.label }}"></image-slot><div style="position:absolute;inset:0;z-index:4;cursor:pointer" draggable="{{ true }}" onClick="{{ img.view }}" onDragStart="{{ img.dragStart }}" onDragOver="{{ img.dragOver }}" onDrop="{{ img.drop }}" onDragEnd="{{ img.dragEnd }}"></div><sc-if value="{{ img.hasName }}" hint-placeholder-val="{{ false }}"><div class="fname" style="container-type:inline-size;z-index:5"><span style="font-size:{{ img.nameFs }}">{{ img.fileName }}</span></div></sc-if></div>
         </sc-for>
       </div>
     </div>
@@ -458,6 +458,21 @@ class Component extends DCLogic {
 
   componentDidMount() {
     this.loadManifest();
+    // ---- routing ----
+    // 404.html stashes the requested path before bouncing to index.html.
+    if (this._routingOn()) {
+      let start = location.pathname;
+      try {
+        const saved = sessionStorage.getItem('sl-route');
+        if (saved) { sessionStorage.removeItem('sl-route'); start = saved; }
+      } catch (e) {}
+      // The catalog needs the manifest, so re-apply once photos have landed.
+      this._pendingRoute = start;
+      this._applyPath(start);
+      this._onPop = () => this._applyPath(location.pathname);
+      window.addEventListener('popstate', this._onPop);
+      if (start !== location.pathname) { try { history.replaceState({}, '', start); } catch (e) {} }
+    }
     // Watch dropped images and match each tile's aspect ratio to the photo's
     // natural orientation (vertical, horizontal, square).
     // (project-page grid cells are fixed squares with fit="contain" — the
@@ -655,6 +670,7 @@ class Component extends DCLogic {
   }
 
   componentWillUnmount() {
+    if (this._onPop) window.removeEventListener('popstate', this._onPop);
     clearInterval(this._ratioTimer);
     clearInterval(this._filledTimer);
     window.removeEventListener('keydown', this._onKeyDown);
@@ -708,6 +724,15 @@ class Component extends DCLogic {
   }
 
   componentDidUpdate() {
+    // Photos arrive after mount, so the first route resolves once the catalog
+    // is populated; after that, state changes write the address bar.
+    if (this._pendingRoute && Object.keys(this.buildCatalog()).length) {
+      const p = this._pendingRoute;
+      this._pendingRoute = null;
+      this._applyPath(p, true);
+    } else if (!this._pendingRoute) {
+      this._syncUrl(false);
+    }
     // Snap the slideshow onto a real filled slide following the 2-hotel /
     // 2-arch / 1-product order, when the current index isn't part of it.
     if (this.state.page === 'home' && this.state.mode === 'single') {
@@ -881,7 +906,7 @@ class Component extends DCLogic {
     const src = this._slotSrc(slotIds[idx]);
     if (!src) return;
     const nm = this.displayNameOf(this.state.fileNames[slotIds[idx]] || '');
-    this.setState({ lightboxSlots: slotIds, lightboxIdx: idx, lightboxSrc: src, lightboxName: nm });
+    this.setState({ lightboxSlots: slotIds, lightboxIdx: idx, lightboxSrc: src, lightboxName: nm, lightboxAlt: this._altForSlot(slotIds[idx]) });
   };
   stepLightbox = (delta) => this.setState((s) => {
     const list = s.lightboxSlots;
@@ -890,9 +915,15 @@ class Component extends DCLogic {
     const idx = (s.lightboxIdx + delta + n) % n;
     const src = this._slotSrc(list[idx]);
     if (!src) return {};
-    return { lightboxIdx: idx, lightboxSrc: src, lightboxName: this.displayNameOf(s.fileNames[list[idx]] || '') };
+    return { lightboxIdx: idx, lightboxSrc: src, lightboxName: this.displayNameOf(s.fileNames[list[idx]] || ''), lightboxAlt: this._altForSlot(list[idx]) };
   });
-  closeLightbox = () => this.setState({ lightboxSrc: null, lightboxSlots: null, lightboxName: '' });
+  closeLightbox = () => this.setState({ lightboxSrc: null, lightboxSlots: null, lightboxName: '', lightboxAlt: '' });
+
+  // A slot's alt text, from its dropped filename or its published repo path.
+  _altForSlot(slotId) {
+    const fn = (this.state.fileNames || {})[slotId] || (this._manifestSrc || {})[slotId] || '';
+    return this.altFor(this.parseFileName(fn));
+  }
 
   goHome = () => this.setState({ page: 'home', mode: 'single', menuOpen: false });
   prevImg = () => this.setState((s) => {
@@ -1019,6 +1050,96 @@ class Component extends DCLogic {
   // filename doesn't spawn its own category. Any "architecture…" variant
   // (architecture, architecture-and-interior, architecture-and-interiors) maps
   // to a single ARCHITECTURE AND INTERIORS category.
+  // ---- URL routing ----
+  // Every category and project gets a real, shareable, indexable address.
+  // GitHub Pages serves no server-side routes, so 404.html hands the path back
+  // to index.html and _applyPath() restores the matching view.
+  // Only active on the live host — a local/editor preview lives at some deep
+  // path where rewriting the URL would break the page.
+  _routingOn() {
+    return /(^|\.)sergiolopezfoto\.com$/.test(location.hostname);
+  }
+
+  _pathFor(s) {
+    const seg = [];
+    if (s.page === 'about') seg.push('about');
+    else if (s.page === 'contact') seg.push('contact');
+    else if (s.page === 'video') seg.push('video');
+    else if (s.page === 'index2') {
+      if (s.cat2) {
+        seg.push(s.cat2);
+        if (s.filter2 && s.filter2.project) seg.push(s.filter2.project);
+      } else seg.push('work');
+    }
+    return '/' + (seg.length ? seg.join('/') + '/' : '');
+  }
+
+  // Per-view title + description: each indexed URL describes its own content
+  // rather than every page sharing the homepage's tags.
+  _metaFor(s) {
+    const words = (v) => (v || '').replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()).trim();
+    const NAME = 'Sergio López';
+    if (s.page === 'about') {
+      return { title: 'About — ' + NAME + ', Hotel & Architecture Photographer',
+        desc: NAME + ' is a hotel and architecture photographer based in Malmö, Sweden, working across Europe and North America.' };
+    }
+    if (s.page === 'contact') {
+      return { title: 'Contact — ' + NAME + ', Hotel & Architecture Photographer',
+        desc: 'Enquiries for hotel, architecture and interiors photography commissions with ' + NAME + ', Malmö.' };
+    }
+    if (s.page === 'video') {
+      return { title: 'Video — ' + NAME, desc: 'Motion and film work by ' + NAME + ', hotel and architecture photographer.' };
+    }
+    if (s.page === 'index2' && s.cat2) {
+      const cat = words(s.cat2);
+      const proj = s.filter2 && s.filter2.project ? words(s.filter2.project) : '';
+      if (proj) {
+        return { title: proj + ' — ' + cat + ' Photography by ' + NAME,
+          desc: proj + ', photographed by ' + NAME + ', ' + cat.toLowerCase() + ' photographer based in Malmö, Sweden.' };
+      }
+      return { title: cat + ' Photography — ' + NAME,
+        desc: cat + ' photography by ' + NAME + ', based in Malmö, Sweden, working across Europe and North America.' };
+    }
+    return { title: NAME + ' — Hotel & Architecture Photographer, Malmö',
+      desc: NAME + ' is a hotel and architecture photographer based in Malmö, Sweden, photographing hotels, interiors and buildings across Europe and North America.' };
+  }
+
+  _syncUrl(replace) {
+    if (!this._routingOn()) return;
+    const s = this.state;
+    const path = this._pathFor(s);
+    const meta = this._metaFor(s);
+    document.title = meta.title;
+    const set = (sel, attr, val) => { const el = document.head.querySelector(sel); if (el) el.setAttribute(attr, val); };
+    set('meta[name="description"]', 'content', meta.desc);
+    set('meta[property="og:title"]', 'content', meta.title);
+    set('meta[property="og:description"]', 'content', meta.desc);
+    set('meta[property="og:url"]', 'content', 'https://sergiolopezfoto.com' + path);
+    set('link[rel="canonical"]', 'href', 'https://sergiolopezfoto.com' + path);
+    if (path !== location.pathname) {
+      try { history[replace ? 'replaceState' : 'pushState']({ p: path }, '', path); } catch (e) {}
+    }
+  }
+
+  // Turn the current address into view state. Unknown paths fall back home.
+  _applyPath(path, replace) {
+    if (!this._routingOn()) return;
+    // The address bar must be written from the state this resolves TO, so the
+    // sync rides the setState callback rather than reading stale state.
+    const done = replace === undefined ? undefined : () => this._syncUrl(replace);
+    const go = (next) => this.setState(next, done);
+    const seg = String(path || '/').split('/').filter(Boolean).map((x) => decodeURIComponent(x).toLowerCase());
+    const flat = { about: 'about', contact: 'contact', video: 'video' };
+    if (!seg.length) return go({ page: 'home', cat2: null, filter2: {} });
+    if (flat[seg[0]]) return go({ page: flat[seg[0]], cat2: null, filter2: {} });
+    if (seg[0] === 'work') return go({ page: 'index2', cat2: null, filter2: {} });
+    const catalog = this.buildCatalog();
+    if (!catalog[seg[0]]) return go({ page: 'home', cat2: null, filter2: {} });
+    const projects = new Set(catalog[seg[0]].slots.map((x) => x.project).filter(Boolean));
+    const filter2 = seg[1] && projects.has(seg[1]) ? { project: seg[1] } : {};
+    go({ page: 'index2', cat2: seg[0], filter2 });
+  }
+
   normalizeCategory(cat) {
     const c = String(cat || '').trim();
     if (/^architecture/.test(c) || /^interior/.test(c)) return 'architecture-and-interiors';
@@ -1064,6 +1185,16 @@ class Component extends DCLogic {
     get('./images/manifest.json')
       .then((list) => apply(list, base) || get(base + 'images/manifest.json').then((l) => apply(l, base)))
       .catch(() => {});
+  }
+
+  // Descriptive alt text for search engines and screen readers, built from the
+  // filename fields: "Hotel Ottilia, Copenhagen — hotel photography by Sergio López".
+  altFor(meta) {
+    const words = (v) => (v || '').replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()).trim();
+    const cat = (meta && meta.category ? meta.category : '').toLowerCase();
+    const subject = [words(meta && meta.project), words(meta && meta.location)].filter(Boolean).join(', ');
+    const kind = cat ? cat.replace(/-/g, ' ') + ' photography' : 'photography';
+    return (subject ? subject + ' — ' : '') + kind + ' by Sergio López';
   }
 
   // Visitor-facing caption for a filename: project field only.
@@ -1389,14 +1520,17 @@ class Component extends DCLogic {
         if (!src) return; // empty slot: click falls through to upload
         e.stopPropagation();
         e.preventDefault();
-        this.setState({ lightboxSrc: src, lightboxName: this.displayNameOf(s.fileNames[img.slotId] || '') });
+        this.setState({ lightboxSrc: src, lightboxName: this.displayNameOf(s.fileNames[img.slotId] || ''), lightboxAlt: this._altForSlot(img.slotId) });
       },
     }));
     // Clamp: index can outlive a shrinking library (or an emptied one), and an
     // undefined currentImg would leave the landing slot with no id — anything
     // dropped there would silently fail to persist.
     const idx = images.length ? Math.min(Math.max(s.index, 0), images.length - 1) : 0;
-    const currentImg = images[idx] || { slotId: 'lib-0', src: '', label: '', fileName: '', hasName: false };
+    const currentImg = images[idx] || { slotId: 'lib-0', src: '', label: '', fileName: '', hasName: false, alt: '' };
+    if (!currentImg.alt) {
+      currentImg.alt = this.altFor(this.parseFileName(currentImg.fileName || (this._manifestSrc || {})[currentImg.slotId] || ''));
+    }
     this._slideOrder = this.buildSlideOrder(images);
 
     // extra galleries from Tweaks: "year: title; year: title"
@@ -1497,6 +1631,7 @@ class Component extends DCLogic {
           },
           dragEnd: () => this.setState({ dragProj: null }),
           label: `${activeDef.title} — ${String(i + 1).padStart(2, '0')}`,
+          alt: this.altFor(this.parseFileName(s.fileNames[slotId] || '')),
           view: (e) => {
             const slot = document.getElementById(slotId);
             const inControls = e && e.nativeEvent && e.nativeEvent.composedPath &&
@@ -1576,6 +1711,7 @@ class Component extends DCLogic {
         slotId: x.slotId,
         src: this.srcFor(x.slotId),
         label: (x.project || x.category).replace(/-/g, ' ').toUpperCase(),
+        alt: this.altFor(x),
         caption: [x.location, x.project].filter(Boolean).join(' · ').replace(/-/g, ' ').toUpperCase(),
         wallDelay: `${(i * 0.02).toFixed(3)}s`,
         view: () => this.openLightboxList(cat2SlotIds, i),
@@ -1609,6 +1745,7 @@ class Component extends DCLogic {
           hasName: !!fn,
           fileName: this.displayNameOf(fn),
           shortLabel: '',
+          alt: this.altFor(this.parseFileName(fn || (this._manifestSrc || {})[slotId] || '')),
           pickBg: picked ? '#111' : 'rgba(253,252,250,.85)',
           pickColor: picked ? '#fff' : '#cfcbbf',
           pickBorder: picked ? '#111' : '#d8d4c8',
@@ -1690,7 +1827,7 @@ class Component extends DCLogic {
       lightboxImg: s.lightboxSrc
         ? React.createElement('img', {
             src: s.lightboxSrc,
-            alt: '',
+            alt: s.lightboxAlt || '',
             onClick: (e) => e.stopPropagation(),
             style: {
               width: 'min(2500px, 96vw)', height: 'min(2500px, 90vh)',

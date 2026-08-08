@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sergio López</title>
+<meta name="robots" content="noindex">
+<script>
+  // GitHub Pages has no server-side routing: every deep link (/hotels/,
+  // /hotels/hotel-ottilia/) lands here. Stash the requested path and hand it
+  // back to index.html, which restores the matching view.
+  try { sessionStorage.setItem('sl-route', location.pathname + location.search); } catch (e) {}
+  location.replace('/');
+</script>
+</head>
+<body></body>
+</html>
