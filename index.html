@@ -1884,7 +1884,11 @@ class Component extends DCLogic {
           alt: `VIDEO ${String(i + 1).padStart(2, '0')}`,
           style: { width: '100%', height: '100%', objectFit: 'cover', display: 'block' },
         }),
-        embed: `https://www.youtube-nocookie.com/embed/${vid}?rel=0&autoplay=1&modestbranding=1`,
+        // Only defined while playing. An unresolved hole renders no attribute,
+        // so an idle card can never emit a literal "{{ v.embed }}" as a src.
+        embed: s.playingVideo === vid
+          ? `https://www.youtube-nocookie.com/embed/${vid}?rel=0&autoplay=1&modestbranding=1`
+          : undefined,
         playing: s.playingVideo === vid,
         idle: s.playingVideo !== vid,
         play: () => this.setState({ playingVideo: vid }),

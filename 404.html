@@ -8,9 +8,27 @@
   // GitHub Pages has no server-side routing: every deep link (/hotels/,
   // /hotels/hotel-ottilia/) lands here. Stash the requested path and hand it
   // back to index.html, which restores the matching view.
-  try { sessionStorage.setItem('sl-route', location.pathname + location.search); } catch (e) {}
-  location.replace('/');
+  //
+  // Two guards, both learned from real analytics noise:
+  //  - Never redirect inside a frame. A broken iframe src used to land here
+  //    and load the whole site a second time inside the frame, which reported
+  //    junk page views and wrecked the interaction and layout-shift numbers.
+  //  - Only redirect paths that look like a route. Asset requests, ids and
+  //    stray template strings should stay a plain 404.
+  (function () {
+    if (window.top !== window.self) return;
+    var p = location.pathname;
+    if (/\.[a-z0-9]{2,5}$/i.test(p)) return;                       // asset
+    if (/%|\{|\}/.test(p)) return;                                 // junk
+    if (/^\/[0-9a-f]{8}-[0-9a-f]{4}-/i.test(p)) return;            // bare uuid
+    if (!/^\/(?:[a-z0-9-]+\/){0,2}$/i.test(p)) return;             // not a route
+    try { sessionStorage.setItem('sl-route', p + location.search); } catch (e) {}
+    location.replace('/');
+  }());
 </script>
 </head>
-<body></body>
+<body>
+<h1>Page not found</h1>
+<p><a href="/">Return to sergiolopezfoto.com</a></p>
+</body>
 </html>
