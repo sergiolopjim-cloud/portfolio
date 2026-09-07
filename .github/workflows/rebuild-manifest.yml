@@ -12,6 +12,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: rebuild-manifest
+  cancel-in-progress: false
+
 jobs:
   manifest:
     runs-on: ubuntu-latest
@@ -44,5 +48,10 @@ jobs:
           git config user.name  "manifest bot"
           git config user.email "actions@github.com"
           git add -A
-          git diff --staged --quiet || git commit -m "rebuild manifest, sitemap and route pages"
-          git push
+          git diff --staged --quiet && exit 0
+          git commit -m "rebuild manifest, sitemap and route pages"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && exit 0
+            sleep 5
+          done
+          exit 1
