@@ -495,7 +495,7 @@
 
   class ImageSlot extends HTMLElement {
     static get observedAttributes() {
-      return ['shape', 'radius', 'mask', 'fit', 'placeholder', 'src', 'id', 'credit', 'credit-href', 'alt'];
+      return ['shape', 'radius', 'mask', 'fit', 'placeholder', 'src', 'id', 'credit', 'credit-href'];
     }
 
     /** Duplicate-slide hook (called by deck-stage, see its
@@ -558,7 +558,7 @@
       root.innerHTML =
         '<style>' + stylesheet + '</style>' +
         '<div class="frame" part="frame">' +
-        '  <img part="image" alt="" draggable="false" style="display:none">' +
+        '  <img part="image" alt="" draggable="false" decoding="async" style="display:none">' +
         '  <div class="empty" part="empty">' + icon +
         '    <div class="cap"></div>' +
         '    <div class="sub">or <u>browse files</u></div></div>' +
@@ -1201,7 +1201,6 @@
           this._releaseMask();
         }
         this._hidShowing = false;
-        this._img.alt = this.getAttribute('alt') || '';
         this._img.style.display = 'block';
         this._empty.style.display = 'none';
         this.setAttribute('data-filled', '');
