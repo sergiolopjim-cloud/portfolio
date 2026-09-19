@@ -69,13 +69,18 @@
 <x-dc>
 <helmet data-dc-atomics="">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <script src="image-slot.js?v=20260807"></script>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Jost:wght@200;300;400;500&amp;display=swap" rel="stylesheet">
 <style>
-  html,body{margin:0;padding:0;background:#fdfcfa;font-family:'Jost',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  /* Metric-matched fallbacks: the local face is scaled to Jost/Oswald's
+     metrics so the webfont swap reflows nothing (kills the CLS on .cap). */
+  @font-face{font-family:'Jost Fallback';src:local('Helvetica Neue'),local('Helvetica'),local('Arial');size-adjust:97.7%;ascent-override:112%;descent-override:32%;line-gap-override:0%}
+  @font-face{font-family:'Oswald Fallback';src:local('Arial Narrow'),local('Arial');size-adjust:91.5%;ascent-override:130%;descent-override:35%;line-gap-override:0%}
+  html,body{margin:0;padding:0;background:#fdfcfa;font-family:'Jost','Jost Fallback',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
   *{box-sizing:border-box}
   ::selection{background:#111;color:#fdfcfa}
-  .cap{font-family:'Oswald',Arial,sans-serif;text-transform:uppercase}
+  .cap{font-family:'Oswald','Oswald Fallback',Arial,sans-serif;text-transform:uppercase}
   .ph{position:relative;background:repeating-linear-gradient(135deg,var(--c1,#dcdad3),var(--c1,#dcdad3) 10px,var(--c2,#e8e6df) 10px,var(--c2,#e8e6df) 20px);display:flex;align-items:center;justify-content:center;overflow:hidden;width:100%;height:100%}
   .ph span{font:10px/1.4 ui-monospace,Menlo,monospace;color:#8a8578;letter-spacing:.03em;text-align:center;padding:0 10px;text-transform:uppercase;pointer-events:none}
   .navlink{cursor:pointer}
@@ -217,7 +222,7 @@
       <div style="min-height:100vh;padding:110px clamp(20px,6vw,60px) 80px;max-width:560px">
         <sc-for list="{{ catList2 }}" as="c" hint-placeholder-count="6">
           <div style="border-bottom:1px solid #eae8e1">
-            <div class="cap navlink" style="display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:18px 0;font-family:'Jost',Helvetica,sans-serif;text-transform:uppercase;font-size:clamp(15px,2.6vw,27px);font-weight:200;letter-spacing:.14em" onClick="{{ c.open }}">
+            <div class="cap navlink" style="display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:18px 0;font-family:'Jost','Jost Fallback',Helvetica,sans-serif;text-transform:uppercase;font-size:clamp(15px,2.6vw,27px);font-weight:200;letter-spacing:.14em" onClick="{{ c.open }}">
               <span style="white-space:nowrap">{{ c.label }}</span>
               <span style="font-size:12px;font-weight:300;color:#b6b2a6;letter-spacing:.1em">{{ c.countLabel }}</span>
             </div>
@@ -231,7 +236,7 @@
     <sc-if value="{{ cat2Selected }}" hint-placeholder-val="{{ false }}">
       <div class="cat2-wrap" style="height:100vh;padding:104px 32px 36px;display:flex;gap:48px;align-items:stretch;max-width:1600px;margin:0 auto;box-sizing:border-box">
         <div style="flex:1;min-width:0;height:100%;display:flex;flex-direction:column">
-          <div class="cap" style="flex: none; font-family: 'Jost',Helvetica,sans-serif; text-transform: uppercase; font-size: clamp(15px,2.6vw,27px); font-weight: 200; letter-spacing: .14em; color: #111; margin-bottom: 32px; text-align: center">{{ cat2Title }}</div>
+          <div class="cap" style="flex: none; font-family: 'Jost','Jost Fallback',Helvetica,sans-serif; text-transform: uppercase; font-size: clamp(15px,2.6vw,27px); font-weight: 200; letter-spacing: .14em; color: #111; margin-bottom: 32px; text-align: center">{{ cat2Title }}</div>
           <div class="cat2-grid" ref="{{ cat2GridRef }}" style="flex:1;min-height:0;overflow-y:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));grid-auto-rows:min-content;gap:14px;align-content:start">
             <sc-for list="{{ cat2Cells }}" as="img" hint-placeholder-count="0">
               <div class="wall-cell cellw" style="position:relative;min-width:0;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;cursor:pointer;animation-delay:{{ img.wallDelay }}" onClick="{{ img.view }}">
@@ -347,7 +352,7 @@
         <sc-for list="{{ videos }}" as="v" hint-placeholder-count="0">
           <div style="aspect-ratio:16/9;position:relative;overflow:hidden;opacity:{{ v.opacity }}" draggable="{{ true }}" onDragStart="{{ v.dragStart }}" onDragOver="{{ v.dragOver }}" onDrop="{{ v.drop }}" onDragEnd="{{ v.dragEnd }}">
             <sc-if value="{{ v.playing }}" hint-placeholder-val="{{ false }}">
-              <iframe src="{{ v.embed }}" title="{{ v.title }}" referrerPolicy="strict-origin-when-cross-origin" style="width:100%;height:100%;border:0;display:block" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+              {{ v.player }}
             </sc-if>
             <sc-if value="{{ v.idle }}" hint-placeholder-val="{{ false }}">
               <div class="navlink" style="position:absolute;inset:0;cursor:pointer" onClick="{{ v.play }}">
@@ -1740,7 +1745,7 @@ class Component extends DCLogic {
       const projects = uniq(bucket.slots.map((x) => x.project));
       cat2Title = bucket.rawCat.replace(/-/g, ' ').toUpperCase();
       cat2AllStyle = chipStyle(!f.location && !f.project);
-      const listItemStyle = (on) => `font-family:'Jost',Helvetica,sans-serif;text-transform:uppercase;font-size:11px;letter-spacing:.13em;text-align:right;cursor:pointer;padding:5px 0;line-height:1.3;color:${on ? '#111' : '#9c988c'};font-weight:${on ? 600 : 300}`;
+      const listItemStyle = (on) => `font-family:'Jost','Jost Fallback',Helvetica,sans-serif;text-transform:uppercase;font-size:11px;letter-spacing:.13em;text-align:right;cursor:pointer;padding:5px 0;line-height:1.3;color:${on ? '#111' : '#9c988c'};font-weight:${on ? 600 : 300}`;
       // A category whose files carry no project field (or just one) has nothing
       // to pick from — show its photos straight away instead of a blank grid.
       const flatCat = projects.length <= 1;
@@ -1890,13 +1895,22 @@ class Component extends DCLogic {
         thumbImg: React.createElement('img', {
           src: `https://img.youtube.com/vi/${vid}/maxresdefault.jpg`,
           alt: `VIDEO ${String(i + 1).padStart(2, '0')}`,
+          loading: 'lazy',
+          decoding: 'async',
           style: { width: '100%', height: '100%', objectFit: 'cover', display: 'block' },
         }),
-        // Only defined while playing. An unresolved hole renders no attribute,
-        // so an idle card can never emit a literal "{{ v.embed }}" as a src.
-        embed: s.playingVideo === vid
-          ? `https://www.youtube-nocookie.com/embed/${vid}?rel=0&autoplay=1&modestbranding=1`
-          : undefined,
+        // Built here, never as a src hole: an unresolved {{ }} in a src
+        // attribute is requested as a literal relative URL and 404s.
+        player: s.playingVideo === vid
+          ? React.createElement('iframe', {
+              src: `https://www.youtube-nocookie.com/embed/${vid}?rel=0&autoplay=1&modestbranding=1`,
+              title: `VIDEO ${String(i + 1).padStart(2, '0')}`,
+              referrerPolicy: 'strict-origin-when-cross-origin',
+              style: { width: '100%', height: '100%', border: 0, display: 'block' },
+              allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+              allowFullScreen: true,
+            })
+          : null,
         playing: s.playingVideo === vid,
         idle: s.playingVideo !== vid,
         play: () => this.setState({ playingVideo: vid }),
